@@ -1,0 +1,55 @@
+=== OpenMRS Installation Wizard
+Follow all the steps exactly as shown in the images to finish the OpenMRS installation.
+
+Whenever asked for username, password, database name enter: **openmrs**
+
+Which is the default used by this repository.
+
+==== Start
+Go to http://localhost:8080/openmrs/[http://localhost:8080/openmrs/] and press the green button
+
+image::openmrs-installation-wizard/1.png[OpenMRS Wizard]
+
+==== Installation Type
+
+image::openmrs-installation-wizard/2.png[]
+
+==== Step 1
+
+image::openmrs-installation-wizard/3.png[]
+
+==== Step 2
+
+image::openmrs-installation-wizard/4.png[]
+
+==== Step 3
+
+image::openmrs-installation-wizard/5.png[]
+
+==== Step 4
+Pick whatever admin password you like.
+
+Just note that the default admin password used by OpenMRS is **Admin123**
+
+image::openmrs-installation-wizard/6.png[]
+
+==== Step 5
+
+image::openmrs-installation-wizard/7.png[]
+
+==== Summary page
+Just click the next button
+
+image::openmrs-installation-wizard/8.png[]
+
+==== Tasks to execute
+Now you just need to wait for the installation to finish
+
+image::openmrs-installation-wizard/9.png[]
+
+==== Login
+Once the wizard is done, you will be redirected to the login page where you
+login as the admin user you created in <<Step 4>>.
+
+image::openmrs-installation-wizard/login.png[]
+

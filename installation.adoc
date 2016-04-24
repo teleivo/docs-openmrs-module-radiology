@@ -1,0 +1,6 @@
+== Installation
+
+include::installation-openmrs.adoc[OpenMRS Installation Wizard]
+
+include::installation-dcm4chee.adoc[Dcm4chee Configuration]
+

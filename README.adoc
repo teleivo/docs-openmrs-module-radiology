@@ -1,0 +1,23 @@
+= openmrs-module-radiology documentation
+
+This project is the documentation for the https://github.com/openmrs/openmrs-module-radiology[OpenMRS Radiology Module]
+
+== Generate Documentation as HTML
+
+Install bundler
+[source,bash]
+gem install bundler
+
+Install dependencies
+[source,bash]
+bundle install
+
+Use guard to monitor and regenerate the HTML files whenever a change in
+asciidoc files is detected
+[source,bash]
+bundle exec guard
+
+To generate index.html with css
+[source,bash]
+asciidoctor -a stylesheet=asciidoctor.css index.adoc
+
