@@ -1,10 +1,19 @@
 = OpenMRS Radiology Module
-:toc:
+:toc: left
 :icons: font
 :imagesdir: assets/images/
 :stylesdir: assets/stylesheets/
 :stylesheet: asciidoctor.css
 :homepage: http://github.com/teleivo/openmrs-module-radiology-docs
+:project-name: OpenMRS Radiology Module
+
+{project-name} is a module adding capabilities of a Radiology Information System (RIS) onto OpenMRS.
+This module connects the open source enterprise electronic medical record system http://www.openmrs.org[OpenMRS]
+with the open source clinical image and object management system http://www.dcm4che.org[dcm4chee].
+
+.Project status
+CAUTION: {project-name} is not yet officially released to the https://modules.openmrs.org[OpenMRS modules].
+The API and UI are not yet stable and subject to frequent changes.
 
 include::installation.adoc[Installation]
 
