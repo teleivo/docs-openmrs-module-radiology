@@ -3,6 +3,7 @@
 :icons: font
 :imagesdir: assets/images/
 :stylesdir: assets/stylesheets/
+:stylesheet: asciidoctor.css
 :homepage: http://github.com/teleivo/openmrs-module-radiology-docs
 
 include::installation.adoc[Installation]
