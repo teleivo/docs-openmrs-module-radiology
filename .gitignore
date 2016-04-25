@@ -1,3 +1,4 @@
+.vagrant/
 *.xml
 *.html
 *.[1-8]
@@ -6,3 +7,4 @@
 *.pdf
 *.lock
 *.swp
+*.log
