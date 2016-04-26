@@ -19,5 +19,9 @@ bundle exec guard
 
 To generate index.html with css
 [source,bash]
-asciidoctor -a stylesheet=asciidoctor.css index.adoc
+asciidoctor index.adoc
+
+NOTE: there is an issue with the Guardfile, it just does not respect the
+default asciidoctor-default.css stylesheet which is used when running
+asciidoctor from the command line
 

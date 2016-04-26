@@ -2,8 +2,6 @@
 :toc: left
 :icons: font
 :imagesdir: assets/images/
-:stylesdir: assets/stylesheets/
-:stylesheet: asciidoctor.css
 :homepage: http://github.com/teleivo/openmrs-module-radiology-docs
 :project-name: OpenMRS Radiology Module
 
