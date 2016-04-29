@@ -1,5 +1,5 @@
 = OpenMRS Radiology Module
-:toc: left
+:toc: preamble
 :icons: font
 :imagesdir: assets/images/
 :homepage: http://github.com/teleivo/openmrs-module-radiology-docs
