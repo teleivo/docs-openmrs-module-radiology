@@ -1,5 +1,6 @@
-=== Dcm4chee Configuration
-Follow all the steps exactly as shown in the images to configure the connection between the OpenMRS radiology module and dcm4chee and to setup the DICOM web viewer weasis in dcm4chee.
+=== Dcm4chee
+Follow all the steps exactly as shown in the images to configure the connection
+between the {project-name} and dcm4chee and to setup the DICOM web viewer weasis in dcm4chee.
 
 Go to http://localhost:8081/jmx-console/[http://localhost:8081/jmx-console/] and login as default admin user
 

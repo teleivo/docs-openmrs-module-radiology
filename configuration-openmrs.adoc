@@ -1,0 +1,32 @@
+=== {project-name}
+Follow the steps as shown to finish configuration of the {project-name}.
+
+==== Radiology Concept Classes
+Before you can start to enter radiology orders you need to define the orderable
+procedures within your facility.
+
+To do that you need to go to the Administration, Settings page and select
+"Radiology" in the menu on the left side.
+
+The setting that needs to be specified is called "Radiology Concept Classes" as
+shown below
+
+image::openmrs-radiology-configuration/radiology-settings.png[]
+
+You can enter any list of OpenMRS concept class UUIDs.
+
+Its easy to find these UUIDs via "Manage Concept Classes" link in the admin
+page
+
+image::openmrs-radiology-configuration/admin-concept-classes.png[]
+
+Click on any concept class you whish to configure, for example "Test"
+
+image::openmrs-radiology-configuration/concept-test.png[]
+
+And copy the UUID you see greyed out at the bottom
+
+image::openmrs-radiology-configuration/concept-test-uuid.png[]
+
+Paste this concept class UUIDs into the "Radiology Concept Classes" settings
+field and hit "Save".

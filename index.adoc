@@ -1,9 +1,17 @@
 = OpenMRS Radiology Module
+:project-name: OpenMRS Radiology Module
 :toc: preamble
 :icons: font
 :imagesdir: assets/images/
+:sectnums:
+
 :homepage: http://github.com/teleivo/openmrs-module-radiology-docs
-:project-name: OpenMRS Radiology Module
+:project-source-code: https://github.com/openmrs/openmrs-module-radiology
+:project-issues-url: https://issues.openmrs.org/browse/RAD
+:project-wiki-url: https://wiki.openmrs.org/display/docs/Radiology+Module
+:project-devops-setup:  https://github.com/teleivo/puppet-openmrs-radiologydcm4chee
+:openmrs-dependency-version: 1.11.4
+
 
 {project-name} is a module adding capabilities of a Radiology Information System (RIS) onto OpenMRS.
 This module connects the open source enterprise electronic medical record system http://www.openmrs.org[OpenMRS]
@@ -13,5 +21,27 @@ with the open source clinical image and object management system http://www.dcm4
 CAUTION: {project-name} is not yet officially released to the https://modules.openmrs.org[OpenMRS modules].
 The API and UI are not yet stable and subject to frequent changes.
 
+
+== Overview
+The most important URLs are
+
+* Source code: {project-source-code}
+* Issues: {project-issues-url}
+* Wiki: {project-wiki-url}
+
+[NOTE]
+.Host and Port configuration
+=====
+This guide assumes that your
+
+* OpenMRS installation can be reached at http://localhost:8080/openmrs/
+* dcm4chee listens to http://localhost:8081/dcm4chee-web3
+
+Please adjust the URLs accordingly.
+=====
+
 include::installation.adoc[Installation]
 
+include::deployment.adoc[Deployment]
+
+include::configuration.adoc[Configuration]

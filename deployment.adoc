@@ -1,0 +1,6 @@
+== Deployment
+
+Since there has not been an official release yet you need to compile the {project-name} yourself.
+
+Please follow the instructions at {project-source-code}.
+
