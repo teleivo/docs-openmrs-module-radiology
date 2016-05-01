@@ -1,24 +1,28 @@
 = OpenMRS Radiology Module
 :project-name: OpenMRS Radiology Module
+:project-short-name: Radiology Module
 :toc: preamble
 :icons: font
 :imagesdir: assets/images/
 :sectnums:
 
 :homepage: http://github.com/teleivo/openmrs-module-radiology-docs
+:project-docs-url: http://github.com/teleivo/openmrs-module-radiology-docs
 :project-source-code: https://github.com/openmrs/openmrs-module-radiology
 :project-issues-url: https://issues.openmrs.org/browse/RAD
 :project-wiki-url: https://wiki.openmrs.org/display/docs/Radiology+Module
 :project-devops-setup:  https://github.com/teleivo/puppet-openmrs-radiologydcm4chee
 :openmrs-dependency-version: 1.11.4
-
+:openmrs-dependency-emrapi-version: 1.13
+:openmrs-modulus-url: https://modules.openmrs.org
 
 {project-name} is a module adding capabilities of a Radiology Information System (RIS) onto OpenMRS.
 This module connects the open source enterprise electronic medical record system http://www.openmrs.org[OpenMRS]
 with the open source clinical image and object management system http://www.dcm4che.org[dcm4chee].
 
 .Project status
-CAUTION: {project-name} is not yet officially released to the https://modules.openmrs.org[OpenMRS modules].
+CAUTION: {project-name} is not yet officially released to the
+{openmrs-modulus-url}[OpenMRS modules].
 The API and UI are not yet stable and subject to frequent changes.
 
 
@@ -28,6 +32,7 @@ The most important URLs are
 * Source code: {project-source-code}
 * Issues: {project-issues-url}
 * Wiki: {project-wiki-url}
+* Documentation: {project-docs-url}
 
 [NOTE]
 .Host and Port configuration

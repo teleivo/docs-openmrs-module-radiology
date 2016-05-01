@@ -1,6 +1,44 @@
 == Deployment
 
-Since there has not been an official release yet you need to compile the {project-name} yourself.
+Deployment of the {project-short-name} consists of deploying all necessary
+dependencies and then the module itself into OpenMRS.
+
+You need to login to your OpenMRS instance as administrative user and go to the
+Administration, Manage Modules page and add the modules shown in the following
+sections.
+
+=== Module Dependencies
+
+The {project-short-name} currently depends on the
+https://github.com/openmrs/openmrs-module-emrapi[OpenMRS EMRAPI Module] version
+{openmrs-dependency-emrapi-version} which itself has a bunch of dependencies.
+
+You can get the dependencies at {openmrs-modulus-url}[OpenMRS modules].
+
+The following list is a suggested order in which we have managed to
+successfully deploy the necessary dependencies:
+
+1. providermanagement - version 2.3
+2. uiframework - version 3.4
+3. uilibrary - version 1.5
+4. emrapi - version {openmrs-dependency-emrapi-version}
+5. event - version 2.2.1
+6. reporting - version 0.9.8.1
+7. htmlwidgets - version 1.7.0
+8. calculation - version 1.1
+9. serialization.xstream - version 0.2.9
+10. metadatasharing - version 1.1.9
+11. metadatamapping - version 1.0.1
+
+NOTE: Do not worry about alerts you might get due to a modules dependencies not
+being met. Just go ahead and deploy its dependencies and hit the start
+button of the module which created the alert. You might also be able to add
+newer versions of the modules listed here.
+
+=== Module Package
+
+Since there has not been an official release yet you need to compile the
+{project-short-name} yourself.
 
 Please follow the instructions at {project-source-code}.
 
