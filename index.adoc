@@ -50,3 +50,5 @@ include::installation.adoc[Installation]
 include::deployment.adoc[Deployment]
 
 include::configuration.adoc[Configuration]
+
+include::requirements.adoc[Requirements]

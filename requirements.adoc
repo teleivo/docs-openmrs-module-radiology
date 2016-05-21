@@ -1,0 +1,134 @@
+== Requirements
+
+This documents shall serve as a requirement for ongoing development and a
+documentation of how things are implemented by the {project-short-name}.
+
+The {project-short-name} aims to adhere to best practices defined by the
+http://www.ihe.net/Technical_Frameworks/#radiology[IHE Radiology Technical Framework].
+
+The {project-short-name} shall implement the following integration profiles:
+
+* Radiology Scheduled Workflow (SWF)
+
+The {project-short-name} acts as the following actors:
+
+* Order Placer
+* Department System Scheduler/Order Filler
+
+NOTE: the module does not provide DICOM Modality Worklist services as
+attributed to actor 'Department System Scheduler/Order Filler' by IHE, this service has to be provided by an external system (like dcm4chee).
+
+The {project-short-name} implements or acts in the following transactions:
+
+* RAD-2 Placer Order Management
+* RAD-3 Filler Order Management
+* RAD-4 Procedure Scheduled
+* RAD-13 Procedure Update
+
+=== Background
+
+The following explains the meaning of terms used in this document
+
+* requested procedure: a unit of work which results in a report
+* scheduled procedure: smallest unit of work which is scheduled and performed
+
+=== User stories
+
+==== Referring Physician - RP
+
+RP-1:: As a referring physician I want to see a list of radiology orders.
+
+Acceptance criteria:
+
+* filter by patient name or id
+* filter by order date
+* filter by status; show only completed, non completed
+
+RP-2:: As a referring physician I want to enter a new radiology order.
+
+Acceptance criteria:
+
+* select patient
+* select order from concept
+* select urgency
+* select date and time if order should be scheduled for specific date
+
+==== Scheduler - S
+
+S-1:: As a scheduler I want to see a list of requested procedures.
+
+Acceptance criteria:
+
+* filter by patient name or id
+* filter by order date
+* filter by status; already scheduled or not
+
+S-2:: As a scheduler I want to define the scheduled procedures needed for the
+requested procedures.
+
+Acceptance criteria:
+
+* TODO
+
+S-3:: As a scheduler I want to define when (date and time) scheduled procedures will be performed.
+
+Acceptance criteria:
+
+* filter by patient name or id
+* filter by order date
+* filter by status; already scheduled or not
+
+==== Performing Technician - PT
+
+PT-1:: As a performing technician I want to see a list of scheduled procedures.
+
+Acceptance criteria:
+
+* filter by patient name or id
+* filter by scheduled date
+* filter by modality
+* filter by scheduled procedure code
+* filter by status; not yet performed; performed
+
+PT-2:: As a performing technician I want to mark a scheduled procedure as
+completed.
+
+Acceptance criteria:
+
+* enter date and time of completion
+* enter provider which performed the procedure
+* more?
+
+NOTE: see IHE Vol 2 for 'MPPS In Progress, Simple Case'; 1 scheduled procedure step results in 1 performed procedure step
+
+PT-3:: As a performing technician I want to create a performed procedure which was not requested.
+
+Acceptance criteria:
+
+* TODO
+
+
+NOTE: see IHE Vol 2 for 'MPPS In Progress, Uncheduled Case'; 0 scheduled procedure step results in 1 performed procedure step
+
+PT-4:: As a performing technician I want to add a performed procedure which was not
+scheduled to a requested procedure.
+
+Acceptance criteria:
+
+* TODO
+
+NOTE: see IHE Vol 2 for 'MPPS In Progress, Append Case'; 1 scheduled procedure step results in 2 performed procedure step
+
+==== Radiologist - R
+
+R-1:: As a radiologist I want to see a list of requested procedures which are
+completed and thus need reporting.
+
+Acceptance criteria:
+
+* filter by patient name or id
+* filter by performed date
+* filter by modality
+* filter by performed procedure code
+* filter by status; not yet reported; already reported
+
