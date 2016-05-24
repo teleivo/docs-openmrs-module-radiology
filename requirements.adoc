@@ -66,6 +66,8 @@ Acceptance criteria:
 * select date and time if order should be scheduled for specific date
 * select orderer from providers (in case I am not an RP, but a data clerk with
 RP permissions entering the order for an RP)
+* enter order reason as free text or from concept (Order.orderReasonNonCoded/orderReason)
+* enter a comment for the fulfiller of the order (Order.commentToFulfiller)
 
 NOTE: creating a radiology order does not create a requested procedure, this
 transaction represents the 'Order Placer' sending an order request to the
