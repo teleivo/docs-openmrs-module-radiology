@@ -125,6 +125,8 @@ STORY:: As a referring physician I want to revise an existing radiology order.
 
 ACCEPTANCE CRITERIA::
 
+On the radiology order's form
+
 * a radiology order can only be revised as long as no imaging procedure
 has been performed.
 
@@ -139,9 +141,11 @@ scheduled procedures for the revised order as if it was a new order.
 
 STORY:: As a referring physician I want to see a list of radiology orders where
 I can narrow down the results by filtering and navigate to a specific radiology
-order's or its requested procedure page.
+order's or its requested procedure's form.
 
 ACCEPTANCE CRITERIA::
+
+On the radiology order list form
 
 * I can see following columns in the list
 * I can filter the list by
@@ -162,9 +166,11 @@ report, study)
 
 STORY:: As a scheduler I want to see a list of scheduled procedures where
 I can narrow down the results by filtering and navigate to a specific scheduled
-procedure's page.
+procedure's form.
 
 ACCEPTANCE CRITERIA::
+
+On the scheduled procedure list form
 
 * I can see following columns in the list
 ** scheduled procedure id
@@ -189,11 +195,12 @@ hyperlink on the corresponding performed procedure id.
 
 ===== SC-2 SCHEDULE PROCEDURES
 
-STORY:: As a scheduler I want to define when (date and time) scheduled procedures will be performed.
+STORY:: As a scheduler I want to schedule (set date and time) an existing
+scheduled procedures.
 
 ACCEPTANCE CRITERIA::
 
-On a scheduled procedures page
+On the scheduled procedure's form
 
 * If the requested procedure of the scheduled procedure I am working on has a
 radiology order, a header summarizing the radiology order information should
@@ -218,12 +225,12 @@ procedure.
 
 ACCEPTANCE CRITERIA::
 
-On a scheduled procedures page
+On a scheduled procedures form
 * I can enter
 ** discontinuation reason (i.e. equipment maintenance, patient did not arrive)
 ** provider who ordered the discontinuation
-* a scheduled procedure can only be discontinued as long as no imaging procedure
-has been performed.
+* CONDITION: a scheduled procedure can only be discontinued as long as it does
+not have a corresponding performed procedure i.e. it has not been performed.
 
 NOTE: A requested procedure can be discontinued even if it already has scheduled
 procedures, but only as long as there is no performed procedure. The existing requested
@@ -300,7 +307,7 @@ another story)
 
 STORY:: As a performing technician I want to see a list of requested procedures
 where I can narrow down the results by filtering and navigate to a specific
-requested procedure's page.
+requested procedure's form.
 
 ACCEPTANCE CRITERIA::
 
@@ -309,7 +316,7 @@ ACCEPTANCE CRITERIA::
 ** patient name or id
 ** requested procedure code
 ** status; not yet performed; performed (has performed procedures?)
-* I can navigate to the requested procedure's page by
+* I can navigate to the requested procedure's form by
 selecting a hyperlink in a specific requested procedure's row
 
 ===== PT-5 MARK SCHEDULED PROCEDURE AS COMPLETE
@@ -341,7 +348,7 @@ scheduled to a requested procedure.
 
 ACCEPTANCE CRITERIA::
 
-* from the requested procedure page I can add a performed procedure
+* from the requested procedure form I can add a performed procedure
 * I can enter all fields of the performed procedure except the link to the
 scheduled procedure
 
