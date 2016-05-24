@@ -52,11 +52,17 @@ which will result in images
 
 The following describes the user roles interacting with the {project-short-name}.
 
+==== Administrator - AD
+
+Administrator of the {project-short-name} configures orderables, DICOM UID org
+root used for DICOM Study Instance UID generation, DICOM web viewer details and
+other OpenMRS related settings.
+
 ==== Referring Physician - RP
 
 Doctor ordering a radiological test to be done on a patient.
 
-==== Scheduler - S
+==== Scheduler - SC
 
 Provider who schedules (sets date, time and location/modality) requested imaging procedures.
 
@@ -67,7 +73,7 @@ patient. To get the scheduled procedures (his TODO list) he has to perform he
 can either find it in the {project-short-name} or at the modality through querying
 the DICOM Modality Worklist from the PACS.
 
-==== Radiologist - R
+==== Radiologist - RA
 
 Radiologist creates radiological reports for completed requested
 procedures.
@@ -140,16 +146,16 @@ selecting a hyperlink in a specific radiology order's row (to see details about
 the requested procedure: scheduled procedures, performed procedures, radiology
 report, study)
 
-==== Scheduler - S
+==== Scheduler - SC
 
-S-1:: As a scheduler I want to add scheduled procedures needed for a specific
+SC-1:: As a scheduler I want to add scheduled procedures needed for a specific
 requested procedure.
 
 Acceptance criteria:
 
 * 
 
-S-1:: As a scheduler I want to see a list of requested procedures.
+SC-2:: As a scheduler I want to see a list of requested procedures.
 
 Acceptance criteria:
 
@@ -157,7 +163,7 @@ Acceptance criteria:
 * filter by order date
 * filter by status; already scheduled or not
 
-S-3:: As a scheduler I want to define when (date and time) scheduled procedures will be performed.
+SC-3:: As a scheduler I want to define when (date and time) scheduled procedures will be performed.
 
 Acceptance criteria:
 
@@ -278,9 +284,9 @@ performed procedure to it as in PT-6 where no scheduled procedure exists.
 NOTE: see {ihe-tf-rad-vol2} for 'MPPS In Progress, Uncheduled Case';
 0 scheduled procedure step results in 1 performed procedure step
 
-==== Radiologist - R
+==== Radiologist - RA
 
-R-1:: As a radiologist I want to see a list of requested procedures which are
+RA-1:: As a radiologist I want to see a list of requested procedures which are
 completed and thus need reporting.
 
 Acceptance criteria:
