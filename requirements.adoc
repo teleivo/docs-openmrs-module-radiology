@@ -16,7 +16,9 @@ The {project-short-name} acts as the following actors:
 * Department System Scheduler/Order Filler
 
 NOTE: the module does not provide DICOM Modality Worklist services as
-attributed to actor 'Department System Scheduler/Order Filler' by IHE, this service has to be provided by an external system (like dcm4chee).
+attributed to actor 'Department System Scheduler/Order Filler' by IHE, this
+service has to be provided by an external system (like a PACS, as for example
+done by dcm4chee).
 
 The {project-short-name} implements or acts in the following transactions:
 
@@ -32,17 +34,25 @@ The following explains the meaning of terms used in this document
 * requested procedure: a unit of work which results in a report
 * scheduled procedure: smallest unit of work which is scheduled and performed
 
+=== User Roles
+
+The following describes the user roles interacting with the {project-short-name}.
+
+Referring Physician:: Doctor ordering a radiological test to be done on a
+patient.
+
+Scheduler:: Provider who schedules (sets date, time and location/modality)
+requested imaging procedures.
+
+Performing Technician:: Technologist performing the imaging procedures on the
+patient. To get the scheduled procedures (his TODO list) he has to perform he
+can either find it in the {project-short-name} or at the modality through querying
+the DICOM Modality Worklist from the PACS.
+
+Radiologist:: Radiologist creates radiological reports for completed requested
+procedures.
+
 === User stories
-
-==== Referring Physician - RP
-
-RP-1:: As a referring physician I want to see a list of radiology orders.
-
-Acceptance criteria:
-
-* filter by patient name or id
-* filter by order date
-* filter by status; show only completed, non completed
 
 RP-2:: As a referring physician I want to enter a new radiology order.
 
