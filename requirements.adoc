@@ -1,6 +1,7 @@
 == Requirements
 
 :ihe-tf-rad-title: IHE Radiology Technical Framework
+:ihe-tf-rad-vol2: IHE Radiology Technical Framework Vol 2
 :ihe-tf-rad-url: http://www.ihe.net/Technical_Frameworks/#radiology
 
 This documents shall serve as a requirement for ongoing development and a
@@ -80,7 +81,7 @@ RP-1:: As a referring physician I want to enter a new radiology order.
 Acceptance criteria:
 
 * select patient
-* select orderable from concept
+* select orderable from concept (i.e. "R/O pulmonary embolism")
 * select urgency
 * select date and time if order should be scheduled for specific date
 * select orderer from providers (in case I am not an RP, but a data clerk with
@@ -118,8 +119,9 @@ has been performed.
 NOTE: A radiology order can be revised even if it already has a
 requested procedure with scheduled procedures, but only as long as there is no
 performed procedure. The existing requested procedure and its scheduled
-procedures will be discontinued. The radiology department will need to request
-and schedule the revised order as if it was a new order.
+procedures will be discontinued since they might no longer match the orderable.
+The radiology department will need to create a new requested procedure with its
+scheduled procedures for the revised order as if it was a new order.
 
 RP-4:: As a referring physician I want to see a list of radiology orders where
 I can narrow down the results by filtering and navigate to a specific radiology
@@ -140,6 +142,13 @@ report, study)
 
 ==== Scheduler - S
 
+S-1:: As a scheduler I want to add scheduled procedures needed for a specific
+requested procedure.
+
+Acceptance criteria:
+
+* 
+
 S-1:: As a scheduler I want to see a list of requested procedures.
 
 Acceptance criteria:
@@ -147,13 +156,6 @@ Acceptance criteria:
 * filter by patient name or id
 * filter by order date
 * filter by status; already scheduled or not
-
-S-2:: As a scheduler I want to define the scheduled procedures needed for the
-requested procedures.
-
-Acceptance criteria:
-
-* TODO
 
 S-3:: As a scheduler I want to define when (date and time) scheduled procedures will be performed.
 
@@ -165,44 +167,116 @@ Acceptance criteria:
 
 ==== Performing Technician - PT
 
-PT-1:: As a performing technician I want to see a list of scheduled procedures.
+PT-1:: As a performing technician I want to create a requested procedure for a
+radiology order.
+
+Acceptance criteria:
+
+* see a header with the radiology order information of the order I am creating
+a requested procedure for (accession number, orderable, orderer, urgency, date
+and time, patient)
+* select requested procedure from concept (i.e. X-RAY, CHEST)
+* QUESTION select a provider which requests this requested procedure (in case I am not a
+PT, but a data clerk with PT permissions entering the requested procedure for a PT)
+* when I save the requested procedure a study is also created with a Study
+Instance UID
+
+IMPORTANT: this story needs clarification. I chose this step to be done by the PT but
+it could of course be done by someone else. The step could be automated in case
+we have a mechanism in place that maps all orderables to requested procedures
+as described by {ihe-tf-rad-title} in 3.4.2 Scheduled Workflow Concepts in
+Practice see example of "R/O Pulmonary Embolism". The mapping would then be
+configured by each implemenation.
+
+NOTE: the use of the requested procedure is to be able refine how the orderable
+is mapped to an imaging procedure. a different kind of code could be used for
+orderables and requested procedures. the orderable is closer to what should be
+done in an abstract sense and the requested procedure closer to the imaging
+procedure.
+
+PT-2:: As a performing technician I want to discontinue an existing requested
+procedure.
+
+Acceptance criteria:
+
+* a requested procedure can only be discontinued as long as no imaging procedure
+has been performed.
+
+NOTE: A requested procedure can be discontinued even if it already has scheduled
+procedures, but only as long as there is no performed procedure. The existing requested
+procedure and its scheduled procedures will be discontinued.
+
+PT-3:: As a performing technician I want to create and add scheduled procedures to a
+requested procedure.
+
+Acceptance criteria:
+
+* see a header with the requested procedure I am adding scheduled procedures to
+(radiology order if exists, requested procedure concept)
+* see existing scheduled procedures
+* add a new scheduled procedure
+** select an imaging procedure from concepts 
+** select a modality type (CT, MR, US, ... see DICOM standard part 3
+C.7.3.1.1.1)
+
+NOTE: again this step could be done by another role, or if a mechanism for
+mapping requested procedures to scheduled procedures exists it could be
+automated or at least pre-filled for the PT which accepts it (but that would be
+another story)
+
+PT-5:: As a performing technician I want to see a list of requested procedures
+where I can narrow down the results by filtering and navigate to a specific
+requested procedure's page.
 
 Acceptance criteria:
 
 * filter by patient name or id
-* filter by scheduled date
-* filter by modality
-* filter by scheduled procedure code
-* filter by status; not yet performed; performed
+* filter by requested procedure code
+* filter by status; not yet performed; performed (has performed procedures?)
+* navigate to the requested procedure's page by
+selecting a hyperlink in a specific requested procedure's row
 
-PT-2:: As a performing technician I want to mark a scheduled procedure as
+PT-5:: As a performing technician I want to mark a scheduled procedure as
 completed.
 
 Acceptance criteria:
 
-* enter date and time of completion
-* enter provider which performed the procedure
-* more?
+* when I select the scheduled procedure to complete it I am redirected to the
+performed procedure form with all info from the scheduled procedure pre-filled
+in the performed procedure's fields
+** scheduled procedure start datetime as performed procedure start datetime
+** scheduled procedure imaging procedure as performed procedure's imaging
+procedure
+** performed procedure is linked to the scheduled procedure (read-only)
+* I am able to
+** enter date and time of completion
+** enter provider which performed the procedure
+** more?
 
-NOTE: see IHE Vol 2 for 'MPPS In Progress, Simple Case'; 1 scheduled procedure step results in 1 performed procedure step
+NOTE: see {ihe-tf-rad-vol2} for 'MPPS In Progress, Simple Case';
+1 scheduled procedure step results in 1 performed procedure step
 
-PT-3:: As a performing technician I want to create a performed procedure which was not requested.
-
-Acceptance criteria:
-
-* TODO
-
-
-NOTE: see IHE Vol 2 for 'MPPS In Progress, Uncheduled Case'; 0 scheduled procedure step results in 1 performed procedure step
-
-PT-4:: As a performing technician I want to add a performed procedure which was not
+PT-6:: As a performing technician I want to add a performed procedure which was not
 scheduled to a requested procedure.
 
 Acceptance criteria:
 
-* TODO
+* from the requested procedure page I can add a performed procedure
+* I can enter all fields of the performed procedure except the link to the
+scheduled procedure
 
-NOTE: see IHE Vol 2 for 'MPPS In Progress, Append Case'; 1 scheduled procedure step results in 2 performed procedure step
+NOTE: see {ihe-tf-rad-vol2} for 'MPPS In Progress, Append Case';
+1 scheduled procedure step results in 2 performed procedure step
+
+PT-7:: As a performing technician I want to create a performed procedure which was not requested.
+
+Acceptance criteria:
+
+* I create a new requested procedure on the requested procedure form and add a
+performed procedure to it as in PT-6 where no scheduled procedure exists.  
+
+NOTE: see {ihe-tf-rad-vol2} for 'MPPS In Progress, Uncheduled Case';
+0 scheduled procedure step results in 1 performed procedure step
 
 ==== Radiologist - R
 
