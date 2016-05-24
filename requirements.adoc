@@ -1,14 +1,20 @@
 == Requirements
 
+:ihe-tf-rad-title: IHE Radiology Technical Framework
+:ihe-tf-rad-url: http://www.ihe.net/Technical_Frameworks/#radiology
+
 This documents shall serve as a requirement for ongoing development and a
 documentation of how things are implemented by the {project-short-name}.
 
 The {project-short-name} aims to adhere to best practices defined by the
-http://www.ihe.net/Technical_Frameworks/#radiology[IHE Radiology Technical Framework].
+{ihe-tf-rad-url}[{ihe-tf-rad-title}].
 
-The {project-short-name} shall implement the following integration profiles:
+The {project-short-name} shall partially implement the following integration profiles:
 
 * Radiology Scheduled Workflow (SWF)
+
+NOTE: the word partially is used above since {project-short-name} will not
+perform all transactions required by the {ihe-tf-rad-title}.
 
 The {project-short-name} acts as the following actors:
 
@@ -38,6 +44,8 @@ The following explains the meaning of terms used in this document
 
 * requested procedure: a unit of work which results in a report
 * scheduled procedure: smallest unit of work which is scheduled and performed
+* performed procedure: smallest unit of work that has actually been performed
+which will result in images
 
 === User Roles
 
