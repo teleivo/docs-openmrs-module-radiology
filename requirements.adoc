@@ -12,8 +12,8 @@ The {project-short-name} shall implement the following integration profiles:
 
 The {project-short-name} acts as the following actors:
 
-* Order Placer
-* Department System Scheduler/Order Filler
+* Order Placer (OP)
+* Department System Scheduler/Order Filler (DSS/OF)
 
 NOTE: the module does not provide DICOM Modality Worklist services as
 attributed to actor 'Department System Scheduler/Order Filler' by IHE, this
@@ -26,6 +26,11 @@ The {project-short-name} implements or acts in the following transactions:
 * RAD-3 Filler Order Management
 * RAD-4 Procedure Scheduled
 * RAD-13 Procedure Update
+
+NOTE: since the {project-short-name} acts as 'Order Placer' and 'Department
+System Scheduler/Order Filler' transaction 'RAD-2' and 'RAD-3' are basically merged.
+There is no need for the 'DSS/OF' to update/notify the 'OP' on creation, revision,
+cancellation of orders, since these actions will always originate at the 'OP'.
 
 === Background
 
