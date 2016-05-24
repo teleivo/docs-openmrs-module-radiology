@@ -51,18 +51,24 @@ which will result in images
 
 The following describes the user roles interacting with the {project-short-name}.
 
-Referring Physician:: Doctor ordering a radiological test to be done on a
-patient.
+==== Referring Physician - RP
 
-Scheduler:: Provider who schedules (sets date, time and location/modality)
-requested imaging procedures.
+Doctor ordering a radiological test to be done on a patient.
 
-Performing Technician:: Technologist performing the imaging procedures on the
+==== Scheduler - S
+
+Provider who schedules (sets date, time and location/modality) requested imaging procedures.
+
+==== Performing Technician - PT
+
+Technologist performing the imaging procedures on the
 patient. To get the scheduled procedures (his TODO list) he has to perform he
 can either find it in the {project-short-name} or at the modality through querying
 the DICOM Modality Worklist from the PACS.
 
-Radiologist:: Radiologist creates radiological reports for completed requested
+==== Radiologist - R
+
+Radiologist creates radiological reports for completed requested
 procedures.
 
 === User stories

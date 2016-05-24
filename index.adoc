@@ -2,6 +2,7 @@
 :project-name: OpenMRS Radiology Module
 :project-short-name: Radiology Module
 :toc: preamble
+:toclevels: 4
 :icons: font
 :imagesdir: assets/images/
 :sectnums:
