@@ -143,28 +143,49 @@ order's or its requested procedure page.
 
 ACCEPTANCE CRITERIA::
 
-* filter by patient name or id
-* filter by order date
-* filter/see if the order has been requested by the radiology department
+* I can see following columns in the list
+* I can filter the list by
+** patient name or id
+** order date
+** filter/see if the order has been requested by the radiology department
 (does it have a requested procedure?)
-* navigate to the radiology order form by selecting a hyperlink in a specific
+* I can navigate to the radiology order form by selecting a hyperlink in a specific
 radiology order's row (for revision/discontinuation of the order)
-* navigate to the radiology order's requested procedure (if existing) by
+* I can navigate to the radiology order's requested procedure (if existing) by
 selecting a hyperlink in a specific radiology order's row (to see details about
 the requested procedure: scheduled procedures, performed procedures, radiology
 report, study)
 
 ==== Scheduler - SC
 
-===== SC-1 LIST REQUESTED PROCEDURES
+===== SC-1 LIST SCHEDULED PROCEDURES
 
-STORY:: As a scheduler I want to see a list of requested procedures.
+STORY:: As a scheduler I want to see a list of scheduled procedures where
+I can narrow down the results by filtering and navigate to a specific scheduled
+procedure's page.
 
 ACCEPTANCE CRITERIA::
 
-* filter by patient name or id
-* filter by order date
-* filter by status; already scheduled or not
+* I can see following columns in the list
+** scheduled procedure id
+** corresponding requested procedure id
+** scheduled procedure start datetime
+** scheduled procedure's imaging procedure
+** scheduled procedure's modality type
+** corresponding performed procedure id
+* I can filter the list by
+** patient name or id
+** scheduled procedure start datetime
+** scheduled procedure's imaging procedure
+** scheduled procedure's modality type
+** scheduled status; already scheduled or not
+** performed status; already performed or not
+* I can navigate to a scheduled procedure's form by selecting the
+hyperlink on the scheduled procedure's id.
+* I can navigate to a corresponding requested procedure's form by selecting the
+hyperlink on the corresponding requested procedure id.
+* I can navigate to a corresponding performed procedure's form by selecting the
+hyperlink on the corresponding performed procedure id.
 
 ===== SC-2 SCHEDULE PROCEDURES
 
@@ -172,9 +193,41 @@ STORY:: As a scheduler I want to define when (date and time) scheduled procedure
 
 ACCEPTANCE CRITERIA::
 
-* filter by patient name or id
-* filter by order date
-* filter by status; already scheduled or not
+On a scheduled procedures page
+
+* If the requested procedure of the scheduled procedure I am working on has a
+radiology order, a header summarizing the radiology order information should
+show. The radiology order header shows
+** patient
+** order number
+** accession number
+** orderable
+** orderer
+** urgency
+** date and time
+* I can see a header with the requested procedure information of the scheduled
+procedures requested procedure. The requested procedure header shows
+** requested procedure id
+** requested procedure
+* I can set the scheduled procedure's start datetime and save it
+
+===== SC-3 DISCONTINUE SCHEDULED PROCEDURE
+
+STORY:: As a scheduler I want to discontinue an existing scheduled
+procedure.
+
+ACCEPTANCE CRITERIA::
+
+On a scheduled procedures page
+* I can enter
+** discontinuation reason (i.e. equipment maintenance, patient did not arrive)
+** provider who ordered the discontinuation
+* a scheduled procedure can only be discontinued as long as no imaging procedure
+has been performed.
+
+NOTE: A requested procedure can be discontinued even if it already has scheduled
+procedures, but only as long as there is no performed procedure. The existing requested
+procedure and its scheduled procedures will be discontinued.
 
 ==== Performing Technician - PT
 
@@ -228,10 +281,12 @@ requested procedure.
 
 ACCEPTANCE CRITERIA::
 
-* see a header with the requested procedure I am adding scheduled procedures to
-(radiology order if exists, requested procedure concept)
-* see existing scheduled procedures
-* add a new scheduled procedure
+* I can see a header with the requested procedure I am adding scheduled
+procedures to. The header shows
+** radiology order (if exists)
+** requested procedure concept
+* I can see existing scheduled procedures
+* I can add a new scheduled procedure
 ** select an imaging procedure from concepts 
 ** select a modality type (CT, MR, US, ... see DICOM standard part 3
 C.7.3.1.1.1)
@@ -249,10 +304,12 @@ requested procedure's page.
 
 ACCEPTANCE CRITERIA::
 
-* filter by patient name or id
-* filter by requested procedure code
-* filter by status; not yet performed; performed (has performed procedures?)
-* navigate to the requested procedure's page by
+* I can see following columns in the list
+* I can filter the list by
+** patient name or id
+** requested procedure code
+** status; not yet performed; performed (has performed procedures?)
+* I can navigate to the requested procedure's page by
 selecting a hyperlink in a specific requested procedure's row
 
 ===== PT-5 MARK SCHEDULED PROCEDURE AS COMPLETE
@@ -312,9 +369,11 @@ completed and thus need reporting.
 
 ACCEPTANCE CRITERIA::
 
-* filter by patient name or id
-* filter by performed date
-* filter by modality
-* filter by performed procedure code
-* filter by status; not yet reported; already reported
+* I can see following columns in the list
+* I can filter the list by
+** patient name or id
+** performed date
+** modality type
+** performed procedure code
+** status; not yet reported; already reported
 
