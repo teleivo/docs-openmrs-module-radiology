@@ -91,14 +91,15 @@ ACCEPTANCE CRITERIA::
 On the radiology order form
 
 * I can
-** select patient
-** an orderable from concept (i.e. "R/O pulmonary embolism")
-** select urgency
-** select date and time if order should be scheduled for specific date
+** select patient [required]
+** an orderable from concept (i.e. "R/O pulmonary embolism") [required]
+** select urgency [required; defaults to ROUTINE]
+** select date and time [only required if order urgency is set to ON SCHEDULED DATE]
 ** select orderer from providers (in case I am not an RP, but a data clerk with
-RP permissions entering the order for an RP)
-** enter order reason as free text or from concept (Order.orderReasonNonCoded/orderReason)
-** enter a comment for the fulfiller of the order (Order.commentToFulfiller)
+RP permissions entering the order for an RP) [required]
+** enter order reason as free text [optional]
+** select order reason from concept [optional]
+** enter a comment for the fulfiller of the order [optional]
 
 NOTE: creating a radiology order does not create a requested procedure, this
 transaction represents the 'Order Placer' sending an order request to the
@@ -118,8 +119,8 @@ On the radiology order's form
 
 * I can enter
 ** discontinuation reason (i.e. incorrect orderable ordered, patient refused to
-continue treatment, ...)
-** provider who ordered the discontinuation
+continue treatment, ...) [required]
+** provider who ordered the discontinuation [required]
 * CONDITION: a radiology order can only be discontinued as long as no imaging procedure
 has been performed.
 
@@ -160,23 +161,17 @@ ACCEPTANCE CRITERIA::
 On the radiology order list form
 
 * I can see following columns in the list
-** radiology order id
-** patient id + full name
+** radiology order id (hyperlink to radiology order form)
+** patient id + full name (hyperlink to patient dashboard form)
 ** radiology order orderable
 ** radiology order urgency
 ** radiology order start date
-** corresponding requested procedure id
+** corresponding requested procedure id (hyperlink to requested procedure form)
 * I can filter the list by
 ** patient name or id
-** order date
+** radiology order start date
 ** filter/see if the order has been requested by the radiology department
-(does it have a requested procedure?)
-* I can navigate to a radiology order's form by selecting the
-hyperlink on the radiology order's id.
-* I can navigate to a corresponding requested procedure's form by selecting the
-hyperlink on the corresponding requested procedure id.
-* I can navigate to a patients dashboard form by selecting the
-hyperlink on the patients's id.
+(does it have a corresponding requested procedure?)
 
 ==== Scheduler - SC
 
@@ -191,12 +186,14 @@ ACCEPTANCE CRITERIA::
 On the scheduled procedure list form
 
 * I can see following columns in the list
-** scheduled procedure id
-** corresponding requested procedure id
+** scheduled procedure id (hyperlink to the scheduled procedure form)
+** corresponding requested procedure id (hyperlink to the requested procedure
+form)
 ** scheduled procedure start datetime
 ** scheduled procedure's imaging procedure
 ** scheduled procedure's modality type
-** corresponding performed procedure id
+** corresponding performed procedure id (hyperlink to the performed procedure
+form)
 * I can filter the list by
 ** patient name or id
 ** scheduled procedure start datetime
@@ -204,56 +201,49 @@ On the scheduled procedure list form
 ** scheduled procedure's modality type
 ** scheduled status; already scheduled or not
 ** performed status; already performed or not
-* I can navigate to a scheduled procedure's form by selecting the
-hyperlink on the scheduled procedure's id.
-* I can navigate to a corresponding requested procedure's form by selecting the
-hyperlink on the corresponding requested procedure id.
-* I can navigate to a corresponding performed procedure's form by selecting the
-hyperlink on the corresponding performed procedure id.
 
-===== SC-2 SCHEDULE PROCEDURES
+===== SC-2 SCHEDULE SCHEDULED PROCEDURES
 
-STORY:: As a scheduler I want to schedule (set date and time) an existing
-scheduled procedures.
+STORY:: As a scheduler I want to schedule an existing scheduled procedure.
 
 ACCEPTANCE CRITERIA::
 
 On the scheduled procedure's form
 
-* If the requested procedure of the scheduled procedure I am working on has a
-radiology order, a header summarizing the radiology order information should
-show. The radiology order header shows
+* If the corresponding requested procedure has a radiology order,
+a header summarizing the radiology order information should be
+shown. The radiology order header shows
 ** patient
 ** order number
 ** accession number
-** orderable
+** order orderable
+** order urgency
 ** orderer
-** urgency
-** date and time
+** order start date
 * I can see a header with the requested procedure information of the scheduled
-procedures requested procedure. The requested procedure header shows
+procedure's corresponding requested procedure. The requested procedure header shows
 ** requested procedure id
 ** requested procedure
 * I can set the scheduled procedure's start datetime and save it
 
+NOTE: a scheduled procedure can only be scheduled if
+* it does not have a corresponding performed procedure i.e. it has not been performed.
+* it has not already been scheduled ???
+
 ===== SC-3 DISCONTINUE SCHEDULED PROCEDURE
 
-STORY:: As a scheduler I want to discontinue an existing scheduled
-procedure.
+STORY:: As a scheduler I want to discontinue an existing scheduled procedure.
 
 ACCEPTANCE CRITERIA::
 
-On a scheduled procedures form
+On the scheduled procedure's form
 
 * I can enter
-** discontinuation reason (i.e. equipment maintenance, patient did not arrive)
-** provider who ordered the discontinuation
-* CONDITION: a scheduled procedure can only be discontinued as long as it does
-not have a corresponding performed procedure i.e. it has not been performed.
+** discontinuation reason (i.e. equipment maintenance, patient did not arrive) [required]
+** provider who ordered the discontinuation [required]
 
-NOTE: A requested procedure can be discontinued even if it already has scheduled
-procedures, but only as long as there is no performed procedure. The existing requested
-procedure and its scheduled procedures will be discontinued.
+NOTE: a scheduled procedure can only be discontinued as long as it does
+not have a corresponding performed procedure i.e. it has not been performed.
 
 ==== Performing Technician - PT
 
