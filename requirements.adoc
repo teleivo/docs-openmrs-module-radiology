@@ -54,14 +54,68 @@ procedures.
 
 === User stories
 
-RP-2:: As a referring physician I want to enter a new radiology order.
+==== Referring Physician - RP
+
+RP-1:: As a referring physician I want to enter a new radiology order.
 
 Acceptance criteria:
 
 * select patient
-* select order from concept
+* select orderable from concept
 * select urgency
 * select date and time if order should be scheduled for specific date
+* select orderer from providers (in case I am not an RP, but a data clerk with
+RP permissions entering the order for an RP)
+
+NOTE: creating a radiology order does not create a requested procedure, this
+transaction represents the 'Order Placer' sending an order request to the
+'Department System Scheduler/Order Filler' in terms of IHE actors. In other
+terms, any department allowed to create radiology orders sends a request for a
+radiology order to the radiology department, but does not interfere with the
+exact details of how the order is going to be executed/reported/billed. These
+details are a matter of the radiology department.
+
+RP-2:: As a referring physician I want to discontinue an existing radiology order.
+
+Acceptance criteria:
+
+* a radiology order can only be discontinued as long as no imaging procedure
+has been performed.
+
+NOTE: A radiology order can be discontinued even if it already has a
+requested procedure with scheduled procedures, but only as long as there is no
+performed procedure. The existing requested procedure and its scheduled
+procedures will be discontinued.
+
+RP-3:: As a referring physician I want to revise an existing radiology order.
+
+Acceptance criteria:
+
+* a radiology order can only be revised as long as no imaging procedure
+has been performed.
+
+NOTE: A radiology order can be revised even if it already has a
+requested procedure with scheduled procedures, but only as long as there is no
+performed procedure. The existing requested procedure and its scheduled
+procedures will be discontinued. The radiology department will need to request
+and schedule the revised order as if it was a new order.
+
+RP-4:: As a referring physician I want to see a list of radiology orders where
+I can narrow down the results by filtering and navigate to a specific radiology
+order's or its requested procedure page.
+
+Acceptance criteria:
+
+* filter by patient name or id
+* filter by order date
+* filter/see if the order has been requested by the radiology department
+(does it have a requested procedure?)
+* navigate to the radiology order form by selecting a hyperlink in a specific
+radiology order's row (for revision/discontinuation of the order)
+* navigate to the radiology order's requested procedure (if existing) by
+selecting a hyperlink in a specific radiology order's row (to see details about
+the requested procedure: scheduled procedures, performed procedures, radiology
+report, study)
 
 ==== Scheduler - S
 
