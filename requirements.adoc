@@ -88,14 +88,17 @@ STORY:: As a referring physician I want to create a new radiology order.
 
 ACCEPTANCE CRITERIA::
 
-* select patient
-* select orderable from concept (i.e. "R/O pulmonary embolism")
-* select urgency
-* select date and time if order should be scheduled for specific date
-* select orderer from providers (in case I am not an RP, but a data clerk with
+On the radiology order form
+
+* I can
+** select patient
+** an orderable from concept (i.e. "R/O pulmonary embolism")
+** select urgency
+** select date and time if order should be scheduled for specific date
+** select orderer from providers (in case I am not an RP, but a data clerk with
 RP permissions entering the order for an RP)
-* enter order reason as free text or from concept (Order.orderReasonNonCoded/orderReason)
-* enter a comment for the fulfiller of the order (Order.commentToFulfiller)
+** enter order reason as free text or from concept (Order.orderReasonNonCoded/orderReason)
+** enter a comment for the fulfiller of the order (Order.commentToFulfiller)
 
 NOTE: creating a radiology order does not create a requested procedure, this
 transaction represents the 'Order Placer' sending an order request to the
@@ -111,7 +114,13 @@ STORY:: As a referring physician I want to discontinue an existing radiology ord
 
 ACCEPTANCE CRITERIA::
 
-* a radiology order can only be discontinued as long as no imaging procedure
+On the radiology order's form
+
+* I can enter
+** discontinuation reason (i.e. incorrect orderable ordered, patient refused to
+continue treatment, ...)
+** provider who ordered the discontinuation
+* CONDITION: a radiology order can only be discontinued as long as no imaging procedure
 has been performed.
 
 NOTE: A radiology order can be discontinued even if it already has a
@@ -127,7 +136,10 @@ ACCEPTANCE CRITERIA::
 
 On the radiology order's form
 
-* a radiology order can only be revised as long as no imaging procedure
+* I can enter
+** TODO
+** TODO
+* CONDITION: a radiology order can only be revised as long as no imaging procedure
 has been performed.
 
 NOTE: A radiology order can be revised even if it already has a
@@ -148,17 +160,23 @@ ACCEPTANCE CRITERIA::
 On the radiology order list form
 
 * I can see following columns in the list
+** radiology order id
+** patient id + full name
+** radiology order orderable
+** radiology order urgency
+** radiology order start date
+** corresponding requested procedure id
 * I can filter the list by
 ** patient name or id
 ** order date
 ** filter/see if the order has been requested by the radiology department
 (does it have a requested procedure?)
-* I can navigate to the radiology order form by selecting a hyperlink in a specific
-radiology order's row (for revision/discontinuation of the order)
-* I can navigate to the radiology order's requested procedure (if existing) by
-selecting a hyperlink in a specific radiology order's row (to see details about
-the requested procedure: scheduled procedures, performed procedures, radiology
-report, study)
+* I can navigate to a radiology order's form by selecting the
+hyperlink on the radiology order's id.
+* I can navigate to a corresponding requested procedure's form by selecting the
+hyperlink on the corresponding requested procedure id.
+* I can navigate to a patients dashboard form by selecting the
+hyperlink on the patients's id.
 
 ==== Scheduler - SC
 
@@ -226,6 +244,7 @@ procedure.
 ACCEPTANCE CRITERIA::
 
 On a scheduled procedures form
+
 * I can enter
 ** discontinuation reason (i.e. equipment maintenance, patient did not arrive)
 ** provider who ordered the discontinuation
@@ -360,6 +379,8 @@ NOTE: see {ihe-tf-rad-vol2} for 'MPPS In Progress, Append Case';
 STORY:: As a performing technician I want to create a performed procedure which was not requested.
 
 ACCEPTANCE CRITERIA::
+
+On the requested procedure form
 
 * I create a new requested procedure on the requested procedure form and add a
 performed procedure to it as in PT-6 where no scheduled procedure exists.  
