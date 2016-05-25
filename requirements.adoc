@@ -39,14 +39,146 @@ System Scheduler/Order Filler' transaction 'RAD-2' and 'RAD-3' are basically mer
 There is no need for the 'DSS/OF' to update/notify the 'OP' on creation, revision,
 cancellation of orders, since these actions will always originate at the 'OP'.
 
-=== Background
+=== TERMS
 
-The following explains the meaning of terms used in this document
+The following explains the meaning of terms used in this document to establish
+common ground
 
-* requested procedure: a unit of work which results in a report
-* scheduled procedure: smallest unit of work which is scheduled and performed
-* performed procedure: smallest unit of work that has actually been performed
-which will result in images
+==== Radiology Order
+
+DEFINITION::
+A radiology order is a radiological test ordered by a referring physician for a
+specific patient.
+
+CONTEXT::
+The radiology order is sent to the radiology department for execution.
+
+COMPONENTS::
+Its main components are
+
+* patient
+* urgency
+* start date
+* orderable (what kind of test should be done? i.e. "CT of the
+Abdomen" or "R/O Pulmonary Embolism")
+* orderer (referring physician or other doctor requesting the order)
+
+SPECIAL TERMS::
+
+*COMPLETED:* A radiology order is completed once a radiology report has been created by the
+radiology department.
+
+==== Requested Procedure
+
+DEFINITION::
+A requested procedure is a unit of work which results in a radiology report.
+
+CONTEXT::
+The requested procedure follows an incoming radiology order. The radiology
+department decides how the radiology order is going to be exectued in terms of
+radiological procedures. Each requested procedure will get one radiology
+report.
+
+COMPONENTS::
+Its main components are
+
+* one corresponding radiology order
+* requested procedure (i.e. "CT ABDOMEN WITH IV CONTRAST"; usually coming
+from a standardized code scheme such as SNOMED CT or RadLex Playbook)
+* one or more scheduled procedures which drill down the requested procedure
+into schedulable/executable steps
+* one or more performed procedures
+* one radiology study
+* one radiology report
+
+SPECIAL TERMS::
+
+*READY FOR REPORTING:* A requested procedure is 'ready for reporting' as soon
+as it has one or more performed procedures and only completed scheduled
+procedures.
+
+*COMPLETED OR REPORTED:* A requested procedure is 'completed' or 'reported'
+once a radiology report has been created.
+
+==== Scheduled Procedure
+
+DEFINITION::
+A scheduled procedure is the smallest unit of work which is scheduled and
+performed.
+
+CONTEXT::
+The radiology department defines how requested procedures are split up into
+units of work. Scheduled procedures are there to reserve resources (imaging
+modality, performing technicians, ...) and reflect the steps needed to actually
+do the work requested in the requested procedure. As an example if a requested
+procedures involves several imaging modalities than these resources need to be
+scheduled (reserved) and thus split up into several scheduled procedures.
+
+COMPONENTS::
+Its main components are
+
+* corresponding requested procedure
+* scheduled procedure (i.e. "CT ABDOMEN WITH IV CONTRAST" usually coming
+from a standardized code scheme such as SNOMED CT or RadLex Playbook)
+* modality type (CT, MR, US, ...)
+* modality (CT01, MR01, ...)
+* scheduled start date
+* scheduled start time
+* corresponding performed procedure
+
+SPECIAL TERMS::
+
+*SCHEDULED:* A scheduled procedure is 'scheduled' as soon as its 'scheduled
+start time', 'scheduled start date' and 'modality' are set.
+
+*COMPLETED OR PERFORMED:* A scheduled procedure is 'completed' or 'performed'
+once it has a corresponding performed procedure.
+
+==== Performed Procedure
+
+DEFINITION::
+Is the smallest unit of work that has actually been performed which will result
+in radiological images.
+
+CONTEXT::
+A performed procedure is the actual work done at an imaging modality resulting
+in radiological images.
+
+COMPONENTS::
+Its main components are
+
+* corresponding requested procedure
+* corresponding scheduled procedure (optional, since it happens that
+procedures are done without being scheduled first)
+* performed procedure (i.e. "CT ABDOMEN WITH IV CONTRAST" usually coming
+from a standardized code scheme such as SNOMED CT or RadLex Playbook. can defer
+from the scheduled procedure)
+* performed start date
+* performed start time
+* performing physician
+
+==== Radiology Study
+
+DEFINITION::
+The imaging study which holds actual radiological images.
+
+CONTEXT::
+TODO
+
+COMPONENTS::
+TODO
+
+==== Radiology Report
+
+DEFINITION::
+The radiology report is made by a radiologist which documents all
+findings made by reading the study's images.
+
+CONTEXT::
+TODO
+
+COMPONENTS::
+TODO
 
 === User Roles
 
