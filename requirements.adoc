@@ -317,7 +317,30 @@ requested procedure with scheduled procedures, but only as long as there is no
 performed procedure. The existing requested procedure and its scheduled
 procedures will be discontinued.
 
-===== RP-3 REVISE ORDER
+===== RP-4 LIST ORDERS
+
+STORY:: As a referring physician I want to see a list of radiology orders so
+that I can navigate to a specific radiology order's order form or its patient
+dashboard form or its corresponding requested procedure's form.
+
+ACCEPTANCE CRITERIA::
+
+* Verify that a referring physician can see a list of radiology orders with
+following columns
+** radiology order id
+** patient id + full name (hyperlink to patient dashboard form)
+** radiology order orderable
+** radiology order urgency
+** radiology order start date
+* Verify that a referring physician can navigate to a radiology order's form
+via its radiology order id value
+* Verify that a referring physician can navigate to a patient's dashboard form
+via its patient id + full name value
+* Verify that a referring physician can filter the list by
+** patient name or id
+** radiology order start date
+
+===== RP-5 REVISE ORDER
 
 STORY:: As a referring physician I want to revise an existing radiology order.
 
@@ -336,27 +359,7 @@ procedures will be discontinued since they might no longer match the orderable.
 The radiology department will need to create a new requested procedure with its
 scheduled procedures for the revised order as if it was a new order.
 
-===== RP-4 LIST ORDERS
-
-STORY:: As a referring physician I want to see a list of radiology orders so
-that I can navigate to a specific radiology order's order form or its patient
-dashboard form or its corresponding requested procedure's form.
-
-ACCEPTANCE CRITERIA::
-
-* Verify that a referring physician can see a list of radiology orders with
-following columns
-** radiology order id (hyperlink to radiology order form)
-** patient id + full name (hyperlink to patient dashboard form)
-** radiology order orderable
-** radiology order urgency
-** radiology order start date
-** corresponding requested procedure id (hyperlink to requested procedure form)
-* Verify that a referring physician can filter the list by
-** patient name or id
-** radiology order start date
-
-===== RP-5 FILTER ORDER LIST BY STATUS
+===== RP-6 FILTER ORDER LIST BY STATUS
 
 STORY:: As a referring physician I want to filter the list of radiology orders
 by its status so I can get only orders that are 'in progress', 'ready for
