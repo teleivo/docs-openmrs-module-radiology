@@ -263,7 +263,7 @@ TIP: read about user stories in 'Mike Cohn -  User Stories Applied'
 
 ==== Referring Physician - RP
 
-===== RP-1 CREATE ORDER
+===== CREATE ORDER
 
 STORY::
 As a referring physician I want to create a radiology order.
@@ -295,7 +295,7 @@ radiology order to the radiology department, but does not interfere with the
 exact details of how the order is going to be executed/reported/billed. These
 details are a matter of the radiology department.
 
-===== RP-2 DISCONTINUE ORDER
+===== DISCONTINUE ORDER
 
 STORY:: As a referring physician I want to discontinue a radiology order.
 
@@ -317,7 +317,7 @@ requested procedure with scheduled procedures, but only as long as there is no
 performed procedure. The existing requested procedure and its scheduled
 procedures will be discontinued.
 
-===== RP-4 LIST ORDERS
+===== LIST ORDERS
 
 STORY:: As a referring physician I want to see a list of radiology orders so
 that I can navigate to a specific radiology order's order form or its patient
@@ -340,7 +340,7 @@ via its patient id + full name value
 ** patient name or id
 ** radiology order start date
 
-===== RP-5 REVISE ORDER
+===== REVISE ORDER
 
 STORY:: As a referring physician I want to revise an existing radiology order.
 
@@ -359,7 +359,7 @@ procedures will be discontinued since they might no longer match the orderable.
 The radiology department will need to create a new requested procedure with its
 scheduled procedures for the revised order as if it was a new order.
 
-===== RP-6 FILTER ORDER LIST BY STATUS
+===== FILTER ORDER LIST BY STATUS
 
 STORY:: As a referring physician I want to filter the list of radiology orders
 by its status so I can get only orders that are 'in progress', 'ready for
@@ -371,7 +371,7 @@ ACCEPTANCE CRITERIA::
 
 ==== Scheduler - SC
 
-===== SC-1 LIST SCHEDULED PROCEDURES
+===== LIST SCHEDULED PROCEDURES
 
 STORY:: As a scheduler I want to see a list of scheduled procedures so that I
 can see what procedures have been and what procedures still need to be
@@ -393,7 +393,7 @@ columns
 * Verify that a scheduler can navigate to a scheduled procedure's form
 via its scheduled procedure id value
 
-===== SC-2 SCHEDULE SCHEDULED PROCEDURES
+===== SCHEDULE SCHEDULED PROCEDURES
 
 STORY:: As a scheduler I want to schedule an existing scheduled procedure so
 that it can be performed by a performing technician.
@@ -416,7 +416,7 @@ order header should show
 * Verify that a scheduler can only schedule a scheduled procedure if it is
 not 'scheduled' or 'completed'
 
-===== SC-3 DISCONTINUE SCHEDULED PROCEDURE
+===== DISCONTINUE SCHEDULED PROCEDURE
 
 STORY:: As a scheduler I want to discontinue an existing scheduled procedure.
 
@@ -433,7 +433,7 @@ not have a corresponding performed procedure i.e. it has not been performed.
 
 ==== Performing Technician - PT
 
-===== PT-1 CREATE REQUESTED PROCEDURE
+===== CREATE REQUESTED PROCEDURE
 
 STORY:: As a performing technician I want to create a requested procedure for a
 radiology order.
@@ -462,7 +462,7 @@ orderables and requested procedures. the orderable is closer to what should be
 done in an abstract sense and the requested procedure closer to the imaging
 procedure.
 
-===== PT-2 DISCONTINUE REQUESTED PROCEDURE
+===== DISCONTINUE REQUESTED PROCEDURE
 
 STORY:: As a performing technician I want to discontinue an existing requested
 procedure.
@@ -476,7 +476,7 @@ NOTE: A requested procedure can be discontinued even if it already has scheduled
 procedures, but only as long as there is no performed procedure. The existing requested
 procedure and its scheduled procedures will be discontinued.
 
-===== PT-3 ADD SCHEDULED PROCEDURES
+===== ADD SCHEDULED PROCEDURES
 
 STORY:: As a performing technician I want to create and add scheduled procedures to a
 requested procedure.
@@ -498,7 +498,7 @@ mapping requested procedures to scheduled procedures exists it could be
 automated or at least pre-filled for the PT which accepts it (but that would be
 another story)
 
-===== PT-4 LIST REQUESTED PROCEDURES
+===== LIST REQUESTED PROCEDURES
 
 STORY:: As a performing technician I want to see a list of requested procedures
 where I can narrow down the results by filtering and navigate to a specific
@@ -514,7 +514,7 @@ ACCEPTANCE CRITERIA::
 * I can navigate to the requested procedure's form by
 selecting a hyperlink in a specific requested procedure's row
 
-===== PT-5 MARK SCHEDULED PROCEDURE AS COMPLETE
+===== MARK SCHEDULED PROCEDURE AS COMPLETE
 
 STORY:: As a performing technician I want to mark a scheduled procedure as
 completed.
@@ -536,7 +536,7 @@ procedure
 NOTE: see {ihe-tf-rad-vol2} for 'MPPS In Progress, Simple Case';
 1 scheduled procedure step results in 1 performed procedure step
 
-===== PT-6 ADD NON-SCHEDULED PERFORMED PROCEDURE
+===== ADD NON-SCHEDULED PERFORMED PROCEDURE
 
 STORY:: As a performing technician I want to add a performed procedure which was not
 scheduled to a requested procedure.
@@ -550,7 +550,7 @@ scheduled procedure
 NOTE: see {ihe-tf-rad-vol2} for 'MPPS In Progress, Append Case';
 1 scheduled procedure step results in 2 performed procedure step
 
-===== PT-7 CREATE NON-REQUESTED PERFORMED PROCEDURE
+===== CREATE NON-REQUESTED PERFORMED PROCEDURE
 
 STORY:: As a performing technician I want to create a performed procedure which was not requested.
 
@@ -559,14 +559,14 @@ ACCEPTANCE CRITERIA::
 On the requested procedure form
 
 * I create a new requested procedure on the requested procedure form and add a
-performed procedure to it as in PT-6 where no scheduled procedure exists.  
+performed procedure to it as in the case where no scheduled procedure exists.  
 
 NOTE: see {ihe-tf-rad-vol2} for 'MPPS In Progress, Uncheduled Case';
 0 scheduled procedure step results in 1 performed procedure step
 
 ==== Radiologist - RA
 
-===== RA-1 LIST REQUESTED PROCEDURES
+===== LIST REQUESTED PROCEDURES
 
 STORY:: As a radiologist I want to see a list of requested procedures which are
 completed and thus need reporting.
