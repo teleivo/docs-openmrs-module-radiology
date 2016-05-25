@@ -373,42 +373,38 @@ ACCEPTANCE CRITERIA::
 
 ===== SC-1 LIST SCHEDULED PROCEDURES
 
-STORY:: As a scheduler I want to see a list of scheduled procedures where
-I can narrow down the results by filtering and navigate to a specific scheduled
-procedure's form.
+STORY:: As a scheduler I want to see a list of scheduled procedures so that I
+can see what procedures have been and what procedures still need to be
+scheduled.
 
 ACCEPTANCE CRITERIA::
 
-On the scheduled procedure list form
-
-* I can see following columns in the list
-** scheduled procedure id (hyperlink to the scheduled procedure form)
-** corresponding requested procedure id (hyperlink to the requested procedure
-form)
+* Verify that a scheduler can see a list of scheduled procedures with following
+columns
+** scheduled procedure id
 ** scheduled procedure start datetime
 ** scheduled procedure's imaging procedure
 ** scheduled procedure's modality type
-** corresponding performed procedure id (hyperlink to the performed procedure
-form)
-* I can filter the list by
+** corresponding performed procedure id
+* Verify that a scheduler can filter the list by
 ** patient name or id
 ** scheduled procedure start datetime
-** scheduled procedure's imaging procedure
-** scheduled procedure's modality type
 ** scheduled status; already scheduled or not
-** performed status; already performed or not
+* Verify that a scheduler can navigate to a scheduled procedure's form
+via its scheduled procedure id value
 
 ===== SC-2 SCHEDULE SCHEDULED PROCEDURES
 
-STORY:: As a scheduler I want to schedule an existing scheduled procedure.
+STORY:: As a scheduler I want to schedule an existing scheduled procedure so
+that it can be performed by a performing technician.
 
 ACCEPTANCE CRITERIA::
 
-On the scheduled procedure's form
-
-* If the corresponding requested procedure has a radiology order,
-a header summarizing the radiology order information should be
-shown. The radiology order header shows
+* Verify that a scheduler can schedule a scheduled procedure by setting its
+scheduled procedure start datetime
+* Verify that a scheduler can see a header with radiology order information if
+the corresponding requested procedure has a radiology order. The radiology
+order header should show
 ** patient
 ** order number
 ** accession number
@@ -416,15 +412,9 @@ shown. The radiology order header shows
 ** order urgency
 ** orderer
 ** order start date
-* I can see a header with the requested procedure information of the scheduled
-procedure's corresponding requested procedure. The requested procedure header shows
-** requested procedure id
-** requested procedure
-* I can set the scheduled procedure's start datetime and save it
-
-NOTE: a scheduled procedure can only be scheduled if
-* it does not have a corresponding performed procedure i.e. it has not been performed.
-* it has not already been scheduled ???
+* Verify that a scheduler can set the scheduled procedure's start datetime
+* Verify that a scheduler can only schedule a scheduled procedure if it is
+not 'scheduled' or 'completed'
 
 ===== SC-3 DISCONTINUE SCHEDULED PROCEDURE
 
