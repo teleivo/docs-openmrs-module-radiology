@@ -62,11 +62,22 @@ Its main components are
 * orderable (what kind of test should be done? i.e. "CT of the
 Abdomen" or "R/O Pulmonary Embolism")
 * orderer (referring physician or other doctor requesting the order)
+* order reason free text or from a standardized code scheme
+* corresponding requested procedure (created by the radiology department)
 
 SPECIAL TERMS::
 
-*COMPLETED:* A radiology order is completed once a radiology report has been created by the
-radiology department.
+*SCHEDULED:* A radiology order is 'scheduled' if its corresponding requested
+procedure is 'scheduled'.
+
+*IN PROGRESS:* A radiology order is 'in progress' if its corresponding requested
+procedure is 'in progress'.
+
+*READY FOR REPORTING:* A radiology order is 'ready for reporting' if its
+corresponding requested procedure is 'ready for reporting'.
+
+*COMPLETED:* A radiology order is 'completed' if its corresponding requested
+procedure is 'completed'.
 
 ==== Requested Procedure
 
@@ -93,12 +104,19 @@ into schedulable/executable steps
 
 SPECIAL TERMS::
 
-*READY FOR REPORTING:* A requested procedure is 'ready for reporting' as soon
-as it has one or more performed procedures and only completed scheduled
-procedures.
+*SCHEDULED:* A requested procedure is 'scheduled' if all of its
+scheduled procedures are 'scheduled'.
 
-*COMPLETED OR REPORTED:* A requested procedure is 'completed' or 'reported'
-once a radiology report has been created.
+*IN PROGRESS:* A requested procedure is 'in progress' if it has at least one
+performed procedure.
+
+*READY FOR REPORTING:* A requested procedure is 'ready for reporting' if all of
+its scheduled procedures are 'completed'; if it has at least one 'completed'
+scheduled procedure and the other scheduled procedures are 'discontinued' or it has
+only 'discontinued' scheduled procedures and at least one performed procedure.
+
+*COMPLETED:* A requested procedure is 'completed' once a radiology report has
+been created.
 
 ==== Scheduled Procedure
 
@@ -131,8 +149,8 @@ SPECIAL TERMS::
 *SCHEDULED:* A scheduled procedure is 'scheduled' as soon as its 'scheduled
 start time', 'scheduled start date' and 'modality' are set.
 
-*COMPLETED OR PERFORMED:* A scheduled procedure is 'completed' or 'performed'
-once it has a corresponding performed procedure.
+*COMPLETED:* A scheduled procedure is 'completed' once it has a corresponding
+performed procedure.
 
 ==== Performed Procedure
 
@@ -198,7 +216,7 @@ Its main components are
 SPECIAL TERMS::
 
 *CLAIMED:* A radiology report is 'claimed' if a radiologist has claimed to
-work on a completed requested procedure.
+work on a requested procedure that is 'ready for reporting'.
 
 *COMPLETED:* A radiology report is 'completed' once a radiologist has set the
 reports status to 'completed'.
@@ -247,22 +265,27 @@ TIP: read about user stories in 'Mike Cohn -  User Stories Applied'
 
 ===== RP-1 CREATE ORDER
 
-STORY:: As a referring physician I want to create a new radiology order.
+STORY::
+As a referring physician I want to create a radiology order.
 
 ACCEPTANCE CRITERIA::
 
-On the radiology order form
-
-* I can
-** select patient [required]
-** an orderable from concept (i.e. "R/O pulmonary embolism") [required]
-** select urgency [required; defaults to ROUTINE]
-** select date and time [only required if order urgency is set to ON SCHEDULED DATE]
-** select orderer from providers (in case I am not an RP, but a data clerk with
-RP permissions entering the order for an RP) [required]
-** enter order reason as free text [optional]
-** select order reason from concept [optional]
-** enter a comment for the fulfiller of the order [optional]
+* Verify that a referring physician can enter a new radiology order by entering
+** patient
+** an orderable from concepts (i.e. "R/O pulmonary embolism")
+** urgency [choose from EMERGENCY, ROUTINE, ON SCHEDULED DATE;
+defaults to ROUTINE]
+** date and time
+** orderer from providers (in case I am not an RP, but a data clerk with
+RP permissions entering the order for an RP)
+** order reason as free text
+** order reason from concept
+** a comment for the fulfiller of the order
+* Verify that a referring physician needs to enter a patient, orderable,
+urgency and orderer
+* Verify that a referring physician only needs to enter an order date and time
+if urgency is set to ON SCHEDULED DATE
+* Verify that a non-referring physician cannot create a radiology order
 
 NOTE: creating a radiology order does not create a requested procedure, this
 transaction represents the 'Order Placer' sending an order request to the
@@ -274,18 +297,20 @@ details are a matter of the radiology department.
 
 ===== RP-2 DISCONTINUE ORDER
 
-STORY:: As a referring physician I want to discontinue an existing radiology order.
+STORY:: As a referring physician I want to discontinue a radiology order.
 
 ACCEPTANCE CRITERIA::
 
-On the radiology order's form
-
-* I can enter
+* Verify that a referring physician can discontinue a radiology order by
+entering
 ** discontinuation reason (i.e. incorrect orderable ordered, patient refused to
-continue treatment, ...) [required]
-** provider who ordered the discontinuation [required]
-* CONDITION: a radiology order can only be discontinued as long as no imaging procedure
-has been performed.
+continue treatment, ...)
+** provider who ordered the discontinuation
+* Verify that a referring physician needs to enter discontinuation reason and
+provider
+* Verify that a non-referring physician cannot discontinue a radiology order
+* Verify that a referring physician cannot discontinue the radiology order if
+it is 'in progress', 'ready for reporting' or 'completed'.
 
 NOTE: A radiology order can be discontinued even if it already has a
 requested procedure with scheduled procedures, but only as long as there is no
