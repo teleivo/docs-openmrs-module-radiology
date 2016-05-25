@@ -212,6 +212,14 @@ procedures.
 
 === User stories
 
+The following user stories define the interactions of the users with the
+{project-short-name}.
+
+User stories are defined in following scheme:
+"As a <user role/> I <want/can/need> <action> so that <achievement/goal>."
+
+TIP: read about user stories in 'Mike Cohn -  User Stories Applied'
+
 ==== Referring Physician - RP
 
 ===== RP-1 CREATE ORDER
