@@ -412,24 +412,25 @@ order header should show
 ** order urgency
 ** orderer
 ** order start date
-* Verify that a scheduler can set the scheduled procedure's start datetime
 * Verify that a scheduler can only schedule a scheduled procedure if it is
 not 'scheduled' or 'completed'
 
 ===== DISCONTINUE SCHEDULED PROCEDURE
 
-STORY:: As a scheduler I want to discontinue an existing scheduled procedure.
+STORY:: As a scheduler I want to discontinue a scheduled procedure.
 
 ACCEPTANCE CRITERIA::
 
-On the scheduled procedure's form
-
-* I can enter
-** discontinuation reason (i.e. equipment maintenance, patient did not arrive) [required]
-** provider who ordered the discontinuation [required]
-
-NOTE: a scheduled procedure can only be discontinued as long as it does
-not have a corresponding performed procedure i.e. it has not been performed.
+* Verify that a scheduler can discontinue a scheduled procedure by entering
+** discontinuation reason (i.e. equipment maintenance, patient did not arrive)
+** provider who ordered the discontinuation
+* Verify that a scheduler needs to enter discontinuation reason and
+provider to discontinue a scheduled procedure
+* Verify that a non-scheduler cannot discontinue a scheduled procedure
+* Verify that a scheduler can discontinue the scheduled procedure if
+it is 'scheduled'
+* Verify that a scheduler cannot discontinue the scheduled procedure if
+it is 'completed'
 
 ==== Performing Technician - PT
 
