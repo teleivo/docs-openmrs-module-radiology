@@ -39,7 +39,7 @@ System Scheduler/Order Filler' transaction 'RAD-2' and 'RAD-3' are basically mer
 There is no need for the 'DSS/OF' to update/notify the 'OP' on creation, revision,
 cancellation of orders, since these actions will always originate at the 'OP'.
 
-=== TERMS
+=== Terms
 
 The following explains the meaning of terms used in this document to establish
 common ground
@@ -160,13 +160,21 @@ from the scheduled procedure)
 ==== Radiology Study
 
 DEFINITION::
-The imaging study which holds actual radiological images.
+The radiology study holds actual radiological images.
 
 CONTEXT::
-TODO
+The radiology study represents what is called study by the DICOM standard.
+The use of a radiology study in the {project-short-name} is to generate a Study
+Instance UID which will propagate vie the DICOM Modality Worklist provided by
+the PACS to the imaging modality. The imaging modality will put the Study
+Instance UID in the images it creates. This allows the {project-short-name} to
+access the DICOM study and its images in the PACS via the Study Instance UID.
 
 COMPONENTS::
-TODO
+Its main components are
+
+* study ID
+* study instance UID (unique identifier of the study)
 
 ==== Radiology Report
 
@@ -175,10 +183,25 @@ The radiology report is made by a radiologist which documents all
 findings made by reading the study's images.
 
 CONTEXT::
-TODO
+Once a requested procedure is 'ready for reporting' a radiologist can claim the
+requested procedure for reporting and create the report.
 
 COMPONENTS::
-TODO
+Its main components are
+
+* corresponding requested procedure
+* report status (claimed, completed, discontinued)
+* report date
+* radiologist writing the report
+* report text
+
+SPECIAL TERMS::
+
+*CLAIMED:* A radiology report is 'claimed' if a radiologist has claimed to
+work on a completed requested procedure.
+
+*COMPLETED:* A radiology report is 'completed' once a radiologist has set the
+reports status to 'completed'.
 
 === User Roles
 
