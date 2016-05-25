@@ -323,13 +323,11 @@ STORY:: As a referring physician I want to revise an existing radiology order.
 
 ACCEPTANCE CRITERIA::
 
-On the radiology order's form
-
-* I can enter
+* Verify that a referring physician can revise a radiology order by
 ** TODO
-** TODO
-* CONDITION: a radiology order can only be revised as long as no imaging procedure
-has been performed.
+* Verify that a non-referring physician cannot revise a radiology order
+* Verify that a referring physician cannot revise the radiology order if
+it is 'in progress', 'ready for reporting' or 'completed'.
 
 NOTE: A radiology order can be revised even if it already has a
 requested procedure with scheduled procedures, but only as long as there is no
@@ -340,26 +338,33 @@ scheduled procedures for the revised order as if it was a new order.
 
 ===== RP-4 LIST ORDERS
 
-STORY:: As a referring physician I want to see a list of radiology orders where
-I can narrow down the results by filtering and navigate to a specific radiology
-order's or its requested procedure's form.
+STORY:: As a referring physician I want to see a list of radiology orders so
+that I can navigate to a specific radiology order's order form or its patient
+dashboard form or its corresponding requested procedure's form.
 
 ACCEPTANCE CRITERIA::
 
-On the radiology order list form
-
-* I can see following columns in the list
+* Verify that a referring physician can see a list of radiology orders with
+following columns
 ** radiology order id (hyperlink to radiology order form)
 ** patient id + full name (hyperlink to patient dashboard form)
 ** radiology order orderable
 ** radiology order urgency
 ** radiology order start date
 ** corresponding requested procedure id (hyperlink to requested procedure form)
-* I can filter the list by
+* Verify that a referring physician can filter the list by
 ** patient name or id
 ** radiology order start date
-** filter/see if the order has been requested by the radiology department
-(does it have a corresponding requested procedure?)
+
+===== RP-5 FILTER ORDER LIST BY STATUS
+
+STORY:: As a referring physician I want to filter the list of radiology orders
+by its status so I can get only orders that are 'in progress', 'ready for
+reporting', 'completed'.
+
+ACCEPTANCE CRITERIA::
+
+* TODO
 
 ==== Scheduler - SC
 
