@@ -94,15 +94,15 @@ Abdomen" I deleted the R/O Pulmonary Embolism is an order reason
 - This orderable should be a convenient set . In the concept dictionary provided by CIEL , there is a concept class of Radiology/Imaging Procedure. By default the module should pull up the concepts with class in the orderable section.
 However using a global property then an institution can create a convenient set that can be used to populate the orderables.
 
-[![Concept](https://github.com/judywawira/openmrs-module-radiology-docs/blob/master/assets/images/requirements/concept.png')]
+![Concept](https://github.com/judywawira/openmrs-module-radiology-docs/blob/master/assets/images/requirements/concept.png)
 
 * orderer (referring physician or other doctor requesting the order)
 * order reason free text or from a standardized code scheme - I would label this as Reason for Study. I think we should have two fields where the first one is a standard schema in the dictionary would be  any concept with class of diagnosis
 and a second field with Additional History which is free text.
 
-```
-~~* corresponding requested procedure (created by the radiology department)~~  Not clear how we would use this ..I would remove it
+*corresponding requested procedure (created by the radiology department)~~  Not clear how we would use this ..I would remove it*
 
+```
 ###Additional Notes:
 1. Decide on Mandatory fields from above - patient details , Priority (instead of Urgency), Date, Test, Orderer and Diagnosis
 2. Wishlist - in future work to incorporate a decision support tool like ACR appropriateness criteria to help ordering doctors figure out the best test for them :: See http://www.acr.org/quality-safety/appropriateness-criteria/acr-select and http://www.acr.org/~/media/ACR/Documents/AppCriteria/Misc/ACRSelect_CPOE.pdf
@@ -123,7 +123,7 @@ corresponding requested procedure is 'ready for reporting'.
 procedure is 'completed'.
 
 ==== Requested Procedure  
-``` ### I dont know if we need to implement anything here .. I would delete this .. ```
+*I dont know if we need to implement anything here .. I would delete this*
 
 DEFINITION::
 A requested procedure is a unit of work which results in a radiology report.
@@ -148,9 +148,7 @@ into schedulable/executable steps
 
 
 ```
-
 Should we delete this?
-
 
 ~~SPECIAL TERMS::~~
 ~~*SCHEDULED:* A requested procedure is 'scheduled' if all of its
@@ -227,7 +225,7 @@ from the scheduled procedure)
 * performed start time
 * performing physician
 
-###  I guess the above is good for definitions but i dont think it helps us be specific in our functionality . This is good information for reference or reading 
+ *I guess the above is good for definitions but i dont think it helps us be specific in our functionality . This is good information for reference or reading* 
 
 ==== Radiology Study
 
@@ -242,7 +240,7 @@ the PACS to the imaging modality. The imaging modality will put the Study
 Instance UID in the images it creates. This allows the {project-short-name} to
 access the DICOM study and its images in the PACS via the Study Instance UID.
 
-
+```
 ### Judy : Remember we have a Study , then series and then instance... so a CT Head is a study , then it can be axial , coronal or sagittal (the series) and each image in the series is an instance
 - Summarizing the above i think of the following functionality
 1. Ability to schedule an exam (this is in the orderable data where the date of examination is selected)
@@ -250,7 +248,7 @@ access the DICOM study and its images in the PACS via the Study Instance UID.
 3. Ability to cancel the examination -- if the patient cannot pay or dies -- and it gets the status cancelled
 4. Generate an accession ID (or a study ID that we can track for reporting)
 5. Support performance of a study by the technologist and set the status to completed both in RIS and using the MPPS .
-
+```
 
 COMPONENTS::
 Its main components are
@@ -305,8 +303,10 @@ reports status to 'completed'.
 
 === User Roles
 
+```
 ### Judy : These roles specify the view of the dashboard that the user sees.. eg a radiologist wants to go to the reading list, while a technologist wants to see the
 modality work list. The ordering doctor should see a list of studies for the patients that are pending , completed and be able to view the report
+```
 
 The following describes the user roles interacting with the {project-short-name}.
 
@@ -380,7 +380,7 @@ radiology order to the radiology department, but does not interfere with the
 exact details of how the order is going to be executed/reported/billed. These
 details are a matter of the radiology department.
 
-### Judy : not sure of above sentence
+*Judy : not sure of above sentence*
 
 ===== DISCONTINUE ORDER
 
@@ -519,7 +519,7 @@ it is 'scheduled'
 * Verify that a scheduler cannot discontinue the scheduled procedure if
 it is 'completed'
 
-### Judy: Just remember to create this as a role for scheduling since the PT can work as a ascheduler too
+*Judy: Just remember to create this as a role for scheduling since the PT can work as a ascheduler too*
 
 ==== Performing Technician - PT
 
@@ -554,9 +554,11 @@ as described by {ihe-tf-rad-title} in 3.4.2 Scheduled Workflow Concepts in
 Practice see example of "R/O Pulmonary Embolism". The mapping would then be
 configured by each implemenation.
 
+```
 ###Judy : I am not sure the exact question. I think the PT should be seeing a modality worklist , select a study , and once its complete  update the status of the study
 The PT should be able to change some values on the modality worklist eg if contrast is given or not. Also there should be a place for Technologist Notes that should be dsiplayed to the
 radiologist. Eg if patient was not cooperative for a study
+```
 
 NOTE: the use of the requested procedure is to be able refine how the orderable
 is mapped to an imaging procedure. a different kind of code could be used for
@@ -589,8 +591,10 @@ TODO
 ----------------
 stories are ok until here, need to do more work on the following
 
+```
 ### Judy : Remember in terms of performance , there is no difference between an imaging study and a procedure .. A procedure would be like CT biopsy or hysterosalpingogram that all have the same
 workflow. Therefore i would merge the section below with the modality worklist
+```
 
 ===== LIST REQUESTED PROCEDURES
 
@@ -675,9 +679,11 @@ ACCEPTANCE CRITERIA::
 ** performed procedure code
 ** status; not yet reported; already reported
 
+```
 ### Judy :: I want to claim a report , type it and complete it
 - Be able to see my residents reports and edit them before approving them
 - Create an addendum to a finalized report
 - Notify other providers of a critical message (wishlist)
 - manage my templates by creating new ones , editing existing ones and deleting old ones
 - Migrate my templates from one system to another 
+```
