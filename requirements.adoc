@@ -90,17 +90,23 @@ Its main components are
 the order , and this field created as a drop down.
 * start date -- I would change this to Study Date...
 * orderable (what kind of test should be done? i.e. "CT of the
-Abdomen" or ~~Scratch this.~~ R/O Pulmonary Embolism~~) The R/O Pulmonary Embolism is an order reason
+Abdomen" I deleted the R/O Pulmonary Embolism is an order reason
 - This orderable should be a convenient set . In the concept dictionary provided by CIEL , there is a concept class of Radiology/Imaging Procedure. By default the module should pull up the concepts with class in the orderable section.
 However using a global property then an institution can create a convenient set that can be used to populate the orderables.
+
+[![Concept](https://github.com/judywawira/openmrs-module-radiology-docs/blob/master/assets/images/requirements/concept.png')]
+
 * orderer (referring physician or other doctor requesting the order)
 * order reason free text or from a standardized code scheme - I would label this as Reason for Study. I think we should have two fields where the first one is a standard schema in the dictionary would be  any concept with class of diagnosis
 and a second field with Additional History which is free text.
+
+```
 ~~* corresponding requested procedure (created by the radiology department)~~  Not clear how we would use this ..I would remove it
 
 ###Additional Notes:
 1. Decide on Mandatory fields from above - patient details , Priority (instead of Urgency), Date, Test, Orderer and Diagnosis
 2. Wishlist - in future work to incorporate a decision support tool like ACR appropriateness criteria to help ordering doctors figure out the best test for them :: See http://www.acr.org/quality-safety/appropriateness-criteria/acr-select and http://www.acr.org/~/media/ACR/Documents/AppCriteria/Misc/ACRSelect_CPOE.pdf
+```
 
 SPECIAL TERMS::
 
@@ -116,7 +122,8 @@ corresponding requested procedure is 'ready for reporting'.
 *COMPLETED:* A radiology order is 'completed' if its corresponding requested
 procedure is 'completed'.
 
-==== Requested Procedure  ### I dont know if we need to implement anything here .. I would delete this ..
+==== Requested Procedure  
+``` ### I dont know if we need to implement anything here .. I would delete this .. ```
 
 DEFINITION::
 A requested procedure is a unit of work which results in a radiology report.
@@ -139,6 +146,12 @@ into schedulable/executable steps
 * one radiology study
 * one radiology report
 
+
+```
+
+Should we delete this?
+
+
 ~~SPECIAL TERMS::~~
 ~~*SCHEDULED:* A requested procedure is 'scheduled' if all of its
 scheduled procedures are 'scheduled'.~~
@@ -153,6 +166,9 @@ only 'discontinued' scheduled procedures and at least one performed procedure.~~
 
 ~~*COMPLETED:* A requested procedure is 'completed' once a radiology report has
 been created.~~
+
+```
+
 
 ==== Scheduled Procedure
 
@@ -211,7 +227,7 @@ from the scheduled procedure)
 * performed start time
 * performing physician
 
-### I guess the above is good for definitions but i dont think it helps us be specific in our functionality . This is good information for reference or reading
+###  I guess the above is good for definitions but i dont think it helps us be specific in our functionality . This is good information for reference or reading 
 
 ==== Radiology Study
 
