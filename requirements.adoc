@@ -68,7 +68,7 @@ CONTEXT::
 The radiology order is sent to the radiology department for execution.
 
 
-### Judy::
+Judy::
 
 ```
 There is a use case where an outside image(done from a different facility is obtained and brought by the patient
@@ -90,7 +90,7 @@ Its main components are
 the order , and this field created as a drop down.
 * start date -- I would change this to Study Date...
 * orderable (what kind of test should be done? i.e. "CT of the
-Abdomen" or ~~R/O Pulmonary Embolism~~) The R/O Pulmonary Embolism is an order reason
+Abdomen" or ~~Scratch this.~~ R/O Pulmonary Embolism~~) The R/O Pulmonary Embolism is an order reason
 - This orderable should be a convenient set . In the concept dictionary provided by CIEL , there is a concept class of Radiology/Imaging Procedure. By default the module should pull up the concepts with class in the orderable section.
 However using a global property then an institution can create a convenient set that can be used to populate the orderables.
 * orderer (referring physician or other doctor requesting the order)
