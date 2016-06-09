@@ -39,17 +39,19 @@ System Scheduler/Order Filler' transaction 'RAD-2' and 'RAD-3' are basically mer
 There is no need for the 'DSS/OF' to update/notify the 'OP' on creation, revision,
 cancellation of orders, since these actions will always originate at the 'OP'.
 
-### Judy
+### Judy's Comments on a possible summary 
 
+```
 I like to think of the radiology functionality around three main users
 
-1. Ordering clinicians - These guys need to order tests , and view results <br>
+1. Ordering clinicians - These guys need to order tests , and view results 
 2. Radiologists - Care about reading studies...They may need to look up patient histories
 - there are two levels of radiologists : Residents and Consultants. The residents dictate the first report called a preliminary report , that when read by the radiologist is approved as the final reports. Therefore there are multiple states of the report including Draft, Preliminary , and Final reports.
 3. The technicians - these guys are in charge of getting the test done. Once an order is created they get a modality worklist that is used to do the procedures and then once the correct images are available , the study is saved and pushed to PACS.
 Once the study is completed then the radiologist can dictate the study. If there is an error eg date or study cancellation , most of this is done by technologists
-4. Admin - this is usually the lady sitting at the front office when you come to radiology. They want to check are you scheduled for any study and is the date correct and check in to show you are available
+4. Admin - this is usually the lady sitting at the front office when you come to radiology. They want to check if you scheduled for any study and is the date correct and check in to show you are available
 5. Admin technical who corrects reports etc
+```
 
 === Terms
 
@@ -66,7 +68,7 @@ CONTEXT::
 The radiology order is sent to the radiology department for execution.
 
 
-###Judy::
+### Judy::
 
 ```
 There is a use case where an outside image(done from a different facility is obtained and brought by the patient
@@ -88,7 +90,7 @@ Its main components are
 the order , and this field created as a drop down.
 * start date -- I would change this to Study Date...
 * orderable (what kind of test should be done? i.e. "CT of the
-Abdomen" or ~~"R/O Pulmonary Embolism"~~) The R/O Pulmonary Embolism is an order reason
+Abdomen" or ~~R/O Pulmonary Embolism~~) The R/O Pulmonary Embolism is an order reason
 - This orderable should be a convenient set . In the concept dictionary provided by CIEL , there is a concept class of Radiology/Imaging Procedure. By default the module should pull up the concepts with class in the orderable section.
 However using a global property then an institution can create a convenient set that can be used to populate the orderables.
 * orderer (referring physician or other doctor requesting the order)
