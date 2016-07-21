@@ -1,9 +1,9 @@
 == Configuration
 
-At this point I expect you to have OpenMRS {openmrs-dependency-version} installed, {project-name} deployed and dcm4chee up and running.
+At this point I expect you to have OpenMRS {openmrs-dependency-version}
+installed and {project-name} deployed.
 
-Whats missing is the connection (DICOM, HL7) between {project-name} and the dcm4chee PACS and the setup of the DICOM web viewer in the PACS.
+You still need to do a little configuration of the {project-name}.
 
 include::configuration-openmrs.adoc[OpenMRS]
 
-include::configuration-dcm4chee.adoc[Dcm4chee]

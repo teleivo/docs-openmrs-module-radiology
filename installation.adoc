@@ -1,22 +1,20 @@
 == Installation
 
-To setup OpenMRS with the {project-name} and dcm4chee you have two main options
+To setup OpenMRS with the {project-name} you have to options
 
 === "Manual"
 
-Follow installation instructions of both projects
+Follow installation instructions of
 
-* https://dcm4che.atlassian.net/wiki/display/ee2/Installation
 * https://wiki.openmrs.org/display/docs/Installing+OpenMRS
 
 and execute all the necessary steps yourself.
 
-=== Devops
+=== Docker
 
-Follow
+Follow instructions at
 
-* {project-devops-setup}
+* {project-source-code-readme-docker}
 
 which will do most of the steps for you.
 
-CAUTION: You will need a stable internet connection. The setup is downloading all necessary archives (a few hundred MBs) from different sites that may or may not be responding well in your area. People have reported timeout issues. If this does not work out for you I suggest you go the "manual" route.
