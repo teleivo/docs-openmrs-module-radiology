@@ -32,3 +32,4 @@ asciidoctor index.adoc
 NOTE: there is an issue with the Guardfile, it just does not respect the
 default asciidoctor-default.css stylesheet which is used when running
 asciidoctor from the command line
+
