@@ -39,6 +39,20 @@ System Scheduler/Order Filler' transaction 'RAD-2' and 'RAD-3' are basically mer
 There is no need for the 'DSS/OF' to update/notify the 'OP' on creation, revision,
 cancellation of orders, since these actions will always originate at the 'OP'.
 
+### Judy's Comments on a possible summary 
+
+```
+I like to think of the radiology functionality around three main users
+
+1. Ordering clinicians - These guys need to order tests , and view results 
+2. Radiologists - Care about reading studies...They may need to look up patient histories
+- there are two levels of radiologists : Residents and Consultants. The residents dictate the first report called a preliminary report , that when read by the radiologist is approved as the final reports. Therefore there are multiple states of the report including Draft, Preliminary , and Final reports.
+3. The technicians - these guys are in charge of getting the test done. Once an order is created they get a modality worklist that is used to do the procedures and then once the correct images are available , the study is saved and pushed to PACS.
+Once the study is completed then the radiologist can dictate the study. If there is an error eg date or study cancellation , most of this is done by technologists
+4. Admin - this is usually the lady sitting at the front office when you come to radiology. They want to check if you scheduled for any study and is the date correct and check in to show you are available
+5. Admin technical who corrects reports etc
+```
+
 === Terms
 
 The following explains the meaning of terms used in this document to establish
@@ -53,17 +67,46 @@ specific patient.
 CONTEXT::
 The radiology order is sent to the radiology department for execution.
 
+
+Judy::
+
+```
+There is a use case where an outside image(done from a different facility is obtained and brought by the patient
+and needs to be read at the local facility).Therefore there is an order for "Outside Interpretation" which would include
+1. Patient Name (First , Middle and Last Name)/ MRN
+2. Study type eg CT head
+3. Name of facility
+4. Whether report is available..
+
+This would create a new study that is complete (after images are uploaded to the PACS system) and a user can claim a report. The label for this study would be
+OUTSIDE CT HEAD .. etc
+```
+
 COMPONENTS::
 Its main components are
 
-* patient
-* urgency
-* start date
+* patient details (MRN/Name)
+* urgency (These are priorities. Some people use numbers eg 0 for must be read immediately, 2 for ED studies , 4 for inpatients and 5 for outpatient /non emergent studies). These could be set up as a global property that can be changed by the person creating
+the order , and this field created as a drop down.
+* start date -- I would change this to Study Date...
 * orderable (what kind of test should be done? i.e. "CT of the
-Abdomen" or "R/O Pulmonary Embolism")
+Abdomen" I deleted the R/O Pulmonary Embolism is an order reason
+- This orderable should be a convenient set . In the concept dictionary provided by CIEL , there is a concept class of Radiology/Imaging Procedure. By default the module should pull up the concepts with class in the orderable section.
+However using a global property then an institution can create a convenient set that can be used to populate the orderables.
+
+![Concept](https://github.com/judywawira/openmrs-module-radiology-docs/blob/master/assets/images/requirements/concept.png)
+
 * orderer (referring physician or other doctor requesting the order)
-* order reason free text or from a standardized code scheme
-* corresponding requested procedure (created by the radiology department)
+* order reason free text or from a standardized code scheme - I would label this as Reason for Study. I think we should have two fields where the first one is a standard schema in the dictionary would be  any concept with class of diagnosis
+and a second field with Additional History which is free text.
+
+*corresponding requested procedure (created by the radiology department)~~  Not clear how we would use this ..I would remove it*
+
+```
+###Additional Notes:
+1. Decide on Mandatory fields from above - patient details , Priority (instead of Urgency), Date, Test, Orderer and Diagnosis
+2. Wishlist - in future work to incorporate a decision support tool like ACR appropriateness criteria to help ordering doctors figure out the best test for them :: See http://www.acr.org/quality-safety/appropriateness-criteria/acr-select and http://www.acr.org/~/media/ACR/Documents/AppCriteria/Misc/ACRSelect_CPOE.pdf
+```
 
 SPECIAL TERMS::
 
@@ -79,7 +122,8 @@ corresponding requested procedure is 'ready for reporting'.
 *COMPLETED:* A radiology order is 'completed' if its corresponding requested
 procedure is 'completed'.
 
-==== Requested Procedure
+==== Requested Procedure  
+*I dont know if we need to implement anything here .. I would delete this*
 
 DEFINITION::
 A requested procedure is a unit of work which results in a radiology report.
@@ -102,21 +146,27 @@ into schedulable/executable steps
 * one radiology study
 * one radiology report
 
-SPECIAL TERMS::
 
-*SCHEDULED:* A requested procedure is 'scheduled' if all of its
-scheduled procedures are 'scheduled'.
+```
+Should we delete this?
 
-*IN PROGRESS:* A requested procedure is 'in progress' if it has at least one
-performed procedure.
+~~SPECIAL TERMS::~~
+~~*SCHEDULED:* A requested procedure is 'scheduled' if all of its
+scheduled procedures are 'scheduled'.~~
 
-*READY FOR REPORTING:* A requested procedure is 'ready for reporting' if all of
+~~*IN PROGRESS:* A requested procedure is 'in progress' if it has at least one
+performed procedure.~~
+
+~~*READY FOR REPORTING:* A requested procedure is 'ready for reporting' if all of
 its scheduled procedures are 'completed'; if it has at least one 'completed'
 scheduled procedure and the other scheduled procedures are 'discontinued' or it has
-only 'discontinued' scheduled procedures and at least one performed procedure.
+only 'discontinued' scheduled procedures and at least one performed procedure.~~
 
-*COMPLETED:* A requested procedure is 'completed' once a radiology report has
-been created.
+~~*COMPLETED:* A requested procedure is 'completed' once a radiology report has
+been created.~~
+
+```
+
 
 ==== Scheduled Procedure
 
@@ -175,6 +225,8 @@ from the scheduled procedure)
 * performed start time
 * performing physician
 
+ *I guess the above is good for definitions but i dont think it helps us be specific in our functionality . This is good information for reference or reading* 
+
 ==== Radiology Study
 
 DEFINITION::
@@ -187,6 +239,16 @@ Instance UID which will propagate vie the DICOM Modality Worklist provided by
 the PACS to the imaging modality. The imaging modality will put the Study
 Instance UID in the images it creates. This allows the {project-short-name} to
 access the DICOM study and its images in the PACS via the Study Instance UID.
+
+```
+### Judy : Remember we have a Study , then series and then instance... so a CT Head is a study , then it can be axial , coronal or sagittal (the series) and each image in the series is an instance
+- Summarizing the above i think of the following functionality
+1. Ability to schedule an exam (this is in the orderable data where the date of examination is selected)
+2. Ability to create a modality worklist that can be queried by day
+3. Ability to cancel the examination -- if the patient cannot pay or dies -- and it gets the status cancelled
+4. Generate an accession ID (or a study ID that we can track for reporting)
+5. Support performance of a study by the technologist and set the status to completed both in RIS and using the MPPS .
+```
 
 COMPONENTS::
 Its main components are
@@ -207,11 +269,29 @@ requested procedure for reporting and create the report.
 COMPONENTS::
 Its main components are
 
-* corresponding requested procedure
-* report status (claimed, completed, discontinued)
+* Radiology study / procedure
+* report status (claimed, ~~completed, discontinued~~) - preliminary , draft or finalized
 * report date
 * radiologist writing the report
 * report text
+
+```
+### Judy : Need a way to add an addendum to a report (if a mistake was made , or we have new images with new findings)
+The report requirements are described in detail in this document :::  https://docs.google.com/document/d/17u8kwEk-2D47ZsfSy_WM5LdpIuXwPm9LAQuoOSbQHHA/edit?usp=sharing
+
+in summary
+1. A radiologist should see a reading list
+2. They should pick a study from the list
+3. They can type a report
+4. They can edit a report
+5. They can create an addendum in a  finalised report
+6. They can use templates
+    a) We need a report management system that allows the radiologists to create new templates, edit templates and delete templates
+    b) Share templates with each other/ across multiple systems
+
+Wishlist:
+1. Create multimedia reports that reference images within a radiology report.
+```
 
 SPECIAL TERMS::
 
@@ -222,6 +302,11 @@ work on a requested procedure that is 'ready for reporting'.
 reports status to 'completed'.
 
 === User Roles
+
+```
+### Judy : These roles specify the view of the dashboard that the user sees.. eg a radiologist wants to go to the reading list, while a technologist wants to see the
+modality work list. The ordering doctor should see a list of studies for the patients that are pending , completed and be able to view the report
+```
 
 The following describes the user roles interacting with the {project-short-name}.
 
@@ -242,7 +327,7 @@ Provider who schedules (sets date, time and location/modality) requested imaging
 ==== Performing Technician - PT
 
 Technologist performing the imaging procedures on the
-patient. To get the scheduled procedures (his TODO list) he has to perform he
+patient. To get the scheduled procedures (his/her TODO list) he has to perform he
 can either find it in the {project-short-name} or at the modality through querying
 the DICOM Modality Worklist from the PACS.
 
@@ -272,20 +357,20 @@ ACCEPTANCE CRITERIA::
 
 * Verify that a referring physician can enter a new radiology order by entering
 ** patient
-** an orderable from concepts (i.e. "R/O pulmonary embolism")
+** an orderable from concepts eg CT head with contrast ~~(i.e. "R/O pulmonary embolism")~~
 ** urgency [choose from EMERGENCY, ROUTINE, ON SCHEDULED DATE;
 defaults to ROUTINE]
 ** date and time
 ** orderer from providers (in case I am not an RP, but a data clerk with
 RP permissions entering the order for an RP)
 ** order reason as free text
-** order reason from concept
+** order reason from concept eg ICD 9 diagnosis code
 ** a comment for the fulfiller of the order
 * Verify that a referring physician needs to enter a patient, orderable,
 urgency and orderer
 * Verify that a referring physician only needs to enter an order date and time
 if urgency is set to ON SCHEDULED DATE
-* Verify that a non-referring physician cannot create a radiology order
+* ~~Verify that a non-referring physician cannot create a radiology order~~  ### Judy : Not sure about this .. do you have a specific example?
 
 NOTE: creating a radiology order does not create a requested procedure, this
 transaction represents the 'Order Placer' sending an order request to the
@@ -294,6 +379,8 @@ terms, any department allowed to create radiology orders sends a request for a
 radiology order to the radiology department, but does not interfere with the
 exact details of how the order is going to be executed/reported/billed. These
 details are a matter of the radiology department.
+
+*Judy : not sure of above sentence*
 
 ===== DISCONTINUE ORDER
 
@@ -432,6 +519,8 @@ it is 'scheduled'
 * Verify that a scheduler cannot discontinue the scheduled procedure if
 it is 'completed'
 
+*Judy: Just remember to create this as a role for scheduling since the PT can work as a ascheduler too*
+
 ==== Performing Technician - PT
 
 ===== CREATE REQUESTED PROCEDURE
@@ -465,6 +554,12 @@ as described by {ihe-tf-rad-title} in 3.4.2 Scheduled Workflow Concepts in
 Practice see example of "R/O Pulmonary Embolism". The mapping would then be
 configured by each implemenation.
 
+```
+###Judy : I am not sure the exact question. I think the PT should be seeing a modality worklist , select a study , and once its complete  update the status of the study
+The PT should be able to change some values on the modality worklist eg if contrast is given or not. Also there should be a place for Technologist Notes that should be dsiplayed to the
+radiologist. Eg if patient was not cooperative for a study
+```
+
 NOTE: the use of the requested procedure is to be able refine how the orderable
 is mapped to an imaging procedure. a different kind of code could be used for
 orderables and requested procedures. the orderable is closer to what should be
@@ -495,6 +590,11 @@ procedures are discontinued as well
 TODO
 ----------------
 stories are ok until here, need to do more work on the following
+
+```
+### Judy : Remember in terms of performance , there is no difference between an imaging study and a procedure .. A procedure would be like CT biopsy or hysterosalpingogram that all have the same
+workflow. Therefore i would merge the section below with the modality worklist
+```
 
 ===== LIST REQUESTED PROCEDURES
 
@@ -528,8 +628,8 @@ procedure
 ** performed procedure is linked to the scheduled procedure (read-only)
 * I am able to
 ** enter date and time of completion
-** enter provider which performed the procedure
-** more?
+~~** enter provider which performed the procedure~~
+** Want to enter technologist notes for occurrences that may have opened abotu the study
 
 NOTE: see {ihe-tf-rad-vol2} for 'MPPS In Progress, Simple Case';
 1 scheduled procedure step results in 1 performed procedure step
@@ -557,7 +657,7 @@ ACCEPTANCE CRITERIA::
 On the requested procedure form
 
 * I create a new requested procedure on the requested procedure form and add a
-performed procedure to it as in the case where no scheduled procedure exists.  
+performed procedure to it as in the case where no scheduled procedure exists.
 
 NOTE: see {ihe-tf-rad-vol2} for 'MPPS In Progress, Uncheduled Case';
 0 scheduled procedure step results in 1 performed procedure step
@@ -579,3 +679,11 @@ ACCEPTANCE CRITERIA::
 ** performed procedure code
 ** status; not yet reported; already reported
 
+```
+### Judy :: I want to claim a report , type it and complete it
+- Be able to see my residents reports and edit them before approving them
+- Create an addendum to a finalized report
+- Notify other providers of a critical message (wishlist)
+- manage my templates by creating new ones , editing existing ones and deleting old ones
+- Migrate my templates from one system to another 
+```
